@@ -1,5 +1,5 @@
 # gmtk-2022
-# Starting TMR
+# Starting 3 hrs
 
 ## rough guide
 
