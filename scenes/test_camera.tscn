@@ -41,8 +41,9 @@ script = ExtResource( 2 )
 
 [node name="player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 286, 256 )
+shortjumpadjustment = 15
 maxspeed = 750
-jump = 10
+jump = 160
 gravity = 3000
 turnspeed = 0
 

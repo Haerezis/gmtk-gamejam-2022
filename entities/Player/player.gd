@@ -44,14 +44,15 @@ func _physics_process(delta):
 	else :
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x,0,accel * delta * 3)
-	if not is_on_floor() and velocity.y < 0 and Input.is_action_just_released("jump") :
-		velocity.y += abs(velocity.y) / shortjumpadjustment
 #handling movement for y axis
 ##jumping when on the ground
-	if Input.is_action_pressed("jump") and is_on_floor() and not jumpbuffer: 
+	if Input.is_action_just_pressed("jump") and is_on_floor() and not jumpbuffer: 
 		$AnimationPlayer.play("jump")
 		velocity.y -= sqrt(gravity * jump * 2) 
 		doublejump = true
+
+	if not is_on_floor() and velocity.y < 0 and Input.is_action_just_released("jump") :
+		velocity.y += abs(velocity.y) / shortjumpadjustment
 
 ##double jump
 	elif doublejump and Input.is_action_just_pressed("jump") and not is_on_floor()  : 
@@ -76,9 +77,7 @@ func _physics_process(delta):
 		doublejump = true
 #main movement function
 	velocity = move_and_slide(velocity,Vector2.UP) 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
 
 #registering the ground so we can play the "lands" animation
 func _on_landing_body_entered(body):
