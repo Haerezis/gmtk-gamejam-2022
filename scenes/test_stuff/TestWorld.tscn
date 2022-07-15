@@ -29,3 +29,5 @@ shape = SubResource( 1 )
 [node name="Player" parent="." instance=ExtResource( 3 )]
 position = Vector2( 52, 358 )
 jump = 10
+
+[node name="Bullets" type="Node2D" parent="."]

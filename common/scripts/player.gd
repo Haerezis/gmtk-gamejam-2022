@@ -10,8 +10,10 @@ export var gravity = 100 * 60
 export var airspeedmodifer = 2
 export var turnspeed = 100
 
+func _input(event):
+	if event.is_action_pressed("shoot"):
+		get_node("DefaultGun").shoot()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	Engine.iterations_per_second = 60
 	
@@ -40,9 +42,6 @@ func _physics_process(delta):
 	if not is_on_floor() :
 		velocity.y += gravity * delta 
 	velocity = move_and_slide(velocity,Vector2.UP)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 
 func _on_landing_body_entered(body):
