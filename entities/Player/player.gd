@@ -7,6 +7,7 @@ extends KinematicBody2D
 var velocity = Vector2.ZERO
 export var shortjumpadjustment = 4
 export var accel = 40 * 60
+export var airdeaccel = 20*60
 export var maxspeed = 400
 export var jump = 150
 export var gravity = 100 * 60
@@ -44,6 +45,8 @@ func _physics_process(delta):
 	else :
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x,0,accel * delta * 3)
+		else:
+			velocity.x = move_toward(velocity.x,0,airdeaccel * delta)
 #handling movement for y axis
 ##jumping when on the ground
 	if Input.is_action_just_pressed("jump") and is_on_floor() and not jumpbuffer: 
@@ -99,3 +102,7 @@ func _on_HP_Logic_die():
 
 func respawn():
 	pass
+
+
+func _on_HP_Logic_iframes():
+	pass # Replace with function body.

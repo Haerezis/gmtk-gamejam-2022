@@ -9,6 +9,7 @@ export var max_hp = 20
 export onready var iframes = $"i-frames".wait_time
 signal die
 
+signal iframes
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -24,6 +25,7 @@ func heal_damage(heal):
 		hp = max_hp
 func  die():
 	emit_signal("die")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

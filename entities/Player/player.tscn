@@ -121,4 +121,5 @@ one_shot = true
 
 [connection signal="body_entered" from="landing" to="." method="_on_landing_body_entered"]
 [connection signal="die" from="HP Logic" to="." method="_on_HP_Logic_die"]
+[connection signal="iframes" from="HP Logic" to="." method="_on_HP_Logic_iframes"]
 [connection signal="timeout" from="jumpbuffer timer" to="." method="_on_Timer_timeout"]
