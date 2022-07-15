@@ -43,8 +43,10 @@ script = ExtResource( 3 )
 [node name="KinematicBody2D" parent="." instance=ExtResource( 2 )]
 position = Vector2( 286, 256 )
 maxspeed = 750
-jump = 12
+jump = 160
+shortjumpadjustment = 5
 gravity = 3000
+airspeedmodifer = 5
 turnspeed = 0
 
 [node name="TileMap" type="TileMap" parent="."]

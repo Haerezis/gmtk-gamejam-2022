@@ -9,6 +9,7 @@ export var accel = 40 * 60
 export var deaccel = 40 * 90
 export var maxspeed = 400
 export var jump = 150
+export var shortjumpadjustment = 4
 export var gravity = 100 * 60
 export var airspeedmodifer = 2
 export var turnspeed = 100
@@ -33,11 +34,13 @@ func _physics_process(delta):
 	else :
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x,0,deaccel * delta * 2.5)
-	if Input.is_action_pressed("jump") and is_on_floor(): 
+	if Input.is_action_just_pressed("jump") and is_on_floor(): # Changed to just_pressed so player doesn't keep kumping while holding jump key
 		$AnimationPlayer.play("jump")
-		velocity.y -= sqrt(gravity) * jump * 2
+		velocity.y -= sqrt(gravity * jump * 2) # fixed this to proper formula
 	if not is_on_floor() :
 		velocity.y += gravity * delta 
+	if not is_on_floor() and velocity.y < 0 and Input.is_action_just_released("jump") :
+		velocity.y += abs(velocity.y) / shortjumpadjustment
 	if prevdir != dir and is_on_floor():
 		velocity.x = 0 + dir.x * turnspeed
 	prevdir = dir
