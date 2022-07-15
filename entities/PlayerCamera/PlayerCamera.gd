@@ -12,7 +12,7 @@ func _ready():
 
 
 func _process(delta):
-	self.position.x = get_parent().get_node("KinematicBody2D").position.x + 100
+	self.position.x = get_parent().get_node("player").position.x + 100
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

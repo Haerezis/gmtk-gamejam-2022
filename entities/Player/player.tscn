@@ -89,7 +89,7 @@ tracks/1/keys = {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 32, 2.5 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="player" type="KinematicBody2D"]
 collision_layer = 0
 script = ExtResource( 2 )
 
@@ -110,7 +110,6 @@ anims/lands = SubResource( 3 )
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="landing"]
-visible = false
 position = Vector2( 0, 37 )
 shape = SubResource( 4 )
 

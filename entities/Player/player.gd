@@ -22,56 +22,79 @@ func _ready():
 
 
 func _physics_process(delta):
-	print(Engine.get_frames_per_second())
-	var dir = Vector2.ZERO#getting the movement direction
+#getting the movement direction
+	var dir = Vector2.ZERO
 	dir.x = (Input.get_action_strength("right") - Input.get_action_strength("left")) * delta
-	if velocity.x > 0 and Input.is_action_just_pressed("left") and not Input.is_action_just_pressed("right"): #making the player turn faster when going the other direction
+
+ #making the player turn faster when going the other direction
+	if velocity.x > 0 and Input.is_action_just_pressed("left") and not Input.is_action_just_pressed("right"):
 		dir.x = 1 * turnspeed
-	elif velocity.x < 0 and Input.is_action_just_pressed("right") and not Input.is_action_just_pressed("left"): #making the player turn faster when going the other direction
-			dir.x = -1 * turnspeed
+	if velocity.x < 0 and Input.is_action_just_pressed("right") and not Input.is_action_just_pressed("left"): 
+		dir.x = -1 * turnspeed
+
+#handling movement for x axis
 	if not dir == Vector2.ZERO : 
 		if is_on_floor():
 			velocity.x += dir.x * accel
 		else:
 			velocity.x += (dir.x * accel) / airspeedmodifer
 		velocity.x = clamp(velocity.x,-maxspeed,maxspeed)
+#making the player slow down when touching the ground
 	else :
 		if is_on_floor():
-			velocity.x = move_toward(velocity.x,0,accel * delta * 2.5)
-	if Input.is_action_pressed("jump") and is_on_floor() and not jumpbuffer: #handling jumping
+			velocity.x = move_toward(velocity.x,0,accel * delta * 3)
+
+#handling movement for y axis
+##jumping when on the ground
+	if Input.is_action_pressed("jump") and is_on_floor() and not jumpbuffer: 
 		$AnimationPlayer.play("jump")
-		velocity.y -= sqrt(gravity) * jump * 2
+		velocity.y -= sqrt(gravity * jump * 2) 
 		doublejump = true
+
+##double jump
 	elif doublejump and Input.is_action_just_pressed("jump") and not is_on_floor()  : 
 		$AnimationPlayer.play("jump")
-		velocity.y -= sqrt(gravity) * jump * 2
+		velocity.y -= sqrt(gravity * jump * 2) 
 		doublejump =false
 		jumpbuffer = false
+
+##buffering jump input
 	elif Input.is_action_just_pressed("jump") and not is_on_floor() and not doublejump: 
 		jumpbuffer =true
-		$"jumpbuffer timer".start()
+#a timer so we can buffer the input and delete it if takes longer 0.1 seconds to hit the ground
+		$"jumpbuffer timer".start() 
+
+##gravity
 	elif not is_on_floor() :
 		velocity.y += gravity * delta 
+##using the buffered input
 	elif jumpbuffer and is_on_floor(): 
-		velocity.y -= sqrt(gravity) * jump * 2
+		velocity.y -= sqrt(gravity * jump * 2) 
 		jumpbuffer = false
 		doublejump = true
-	velocity = move_and_slide(velocity,Vector2.UP) #main movement function
+#main movement function
+	velocity = move_and_slide(velocity,Vector2.UP) 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
-
+#registering the ground so we can play the "lands" animation
 func _on_landing_body_entered(body):
+#this variable is here to stop the animation from playing when we first load into the scene
 	if StopLandingAnimWhenFirstStart : 
 		$AnimationPlayer.play("lands")
 	else :
 		StopLandingAnimWhenFirstStart = true
 
-
+# removing the buffer because it took more than 0.1 seconds
 func _on_Timer_timeout():
 	jumpbuffer = false
 
 
+#on player death respawn
 func _on_HP_Logic_die():
-	get_tree().reload_current_scene()
+	respawn()
+
+
+func respawn():
+	pass

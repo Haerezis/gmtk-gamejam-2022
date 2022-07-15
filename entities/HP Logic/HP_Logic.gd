@@ -6,6 +6,7 @@ extends Node2D
 # var b = "text"
 export var hp = 0
 export var max_hp = 20
+export onready var iframes = $"i-frames".wait_time
 signal die
 
 # Called when the node enters the scene tree for the first time.
@@ -15,6 +16,8 @@ func take_damage(damage):
 	hp -= damage
 	if hp <= 0:
 		die()
+	else:
+		$"i-frames".start()
 func heal_damage(heal):
 	hp += heal
 	if hp > max_hp : 
