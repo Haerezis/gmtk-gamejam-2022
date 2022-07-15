@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://ui/Start.gd" type="Script" id=1]
+[ext_resource path="res://ui/Quit.gd" type="Script" id=2]
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Title" type="Label" parent="."]
+anchor_bottom = 5.0
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 1024.0
+margin_bottom = -2832.0
+text = "Flat platformer"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Start" type="Button" parent="."]
+margin_left = 156.0
+margin_top = 384.0
+margin_right = 300.0
+margin_bottom = 426.0
+rect_pivot_offset = Vector2( 88, 21 )
+text = "START"
+script = ExtResource( 1 )
+
+[node name="Quit" type="Button" parent="."]
+margin_left = 720.0
+margin_top = 380.0
+margin_right = 864.0
+margin_bottom = 422.0
+rect_pivot_offset = Vector2( 88, 21 )
+text = "QUIT"
+script = ExtResource( 2 )
+
+[node name="Control" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[connection signal="pressed" from="Start" to="Start" method="_on_Start_pressed"]
+[connection signal="button_down" from="Quit" to="Quit" method="_on_Quit_button_down"]
+[connection signal="button_up" from="Quit" to="Quit" method="_on_Quit_button_up"]
