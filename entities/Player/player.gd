@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var hp = 5
+
 
 var velocity = Vector2.ZERO
 export var accel = 40 * 60
@@ -56,9 +56,16 @@ func _on_landing_body_entered(body):
 	else:
 		firstly = true
 
+var hp = 10
+var invincible = false
 
-func get_hit():
-	print("oof" + String(hp))
-	
-	if not hp > 0:
-		queue_free()
+func get_hit(damage):
+	if not invincible:
+		invincible = true
+		
+		hp -= damage
+		
+		print("oof" + String(hp))
+		
+		if not hp > 0:
+			queue_free()
