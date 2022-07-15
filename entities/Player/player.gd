@@ -59,10 +59,12 @@ func _on_landing_body_entered(body):
 
 var hp = 10
 var invincible = false
+export var iframeTime = 1
 
 func get_hit(damage):
 	if not invincible:
 		invincible = true
+		$IFrame.wait_time = iframeTime
 		$IFrame.start()
 		
 		hp -= damage
