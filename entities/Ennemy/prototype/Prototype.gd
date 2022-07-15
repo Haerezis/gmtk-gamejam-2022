@@ -23,6 +23,8 @@ var invincible = false
 func get_hit(damage):
 	if not invincible:
 		hp -= damage
+		invincible = true
+		$IFrame.start()
 		
 		print("oof" + String(hp))
 		

@@ -22,6 +22,7 @@ func _ready():
 	Engine.iterations_per_second = 60
 	
 	$Hurtbox.connect("damage", self, "get_hit")
+	$IFrame.connect("timeout", self, "breakInvincible")
 
 func _physics_process(delta):
 	var dir = Vector2.ZERO
@@ -62,6 +63,7 @@ var invincible = false
 func get_hit(damage):
 	if not invincible:
 		invincible = true
+		$IFrame.start()
 		
 		hp -= damage
 		
@@ -69,3 +71,6 @@ func get_hit(damage):
 		
 		if not hp > 0:
 			queue_free()
+
+func breakInvincible():
+	invincible =false

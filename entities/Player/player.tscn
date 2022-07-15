@@ -118,6 +118,8 @@ shape = SubResource( 6 )
 [node name="DefaultGun" parent="." instance=ExtResource( 3 )]
 position = Vector2( 35, 0 )
 
+[node name="IFrame" type="Timer" parent="."]
+
 [connection signal="body_entered" from="landing" to="." method="_on_landing_body_entered"]
 
 [editable path="Hurtbox"]
