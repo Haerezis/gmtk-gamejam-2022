@@ -7,7 +7,7 @@ var invincible = false
 func hit(damage):
 	if not invincible:
 		invincible = true
-		$Timer.start
+		$Timer.start()
 		get_parent().hp -= damage
 		emit_signal("damage")
 
