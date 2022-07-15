@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://common/scripts/player.gd" type="Script" id=2]
@@ -32,6 +32,12 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+
+[sub_resource type="Animation" id=6]
+resource_name = "going left"
+
+[sub_resource type="Animation" id=7]
+resource_name = "going right"
 
 [sub_resource type="Animation" id=5]
 resource_name = "jump"
@@ -94,6 +100,8 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
+"anims/going left" = SubResource( 6 )
+"anims/going right" = SubResource( 7 )
 anims/jump = SubResource( 5 )
 anims/lands = SubResource( 3 )
 
