@@ -11,6 +11,7 @@ export var jump = 150
 export var gravity = 100 * 60
 export var airspeedmodifer = 2
 export var turnspeed = 100
+var firstly = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Engine.iterations_per_second = 60
@@ -45,5 +46,7 @@ func _physics_process(delta):
 
 
 func _on_landing_body_entered(body):
-	$AnimationPlayer.play("lands")
-	print('a')
+	if firstly:
+		$AnimationPlayer.play("lands")
+	else:
+		firstly = true
