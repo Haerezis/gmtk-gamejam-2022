@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 
-
 var velocity = Vector2.ZERO
 export var accel = 40 * 60
 export var deaccel = 40 * 90
