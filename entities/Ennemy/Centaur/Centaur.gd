@@ -3,7 +3,7 @@ extends KinematicBody2D
 var hp = 10
 
 enum {CLOSE, IDLE, FOLLOW, CHARGE, DASH, MELEE}
-const SPEED = 50
+const SPEED = 40
 
 var currentState = CLOSE
 var direction = Vector2.RIGHT
@@ -21,6 +21,7 @@ func _ready():
 	$IFrameTimer.connect("timeout", self, "breakInvincible")
 	$TriggerArea.connect("area_entered", self, "seenPlayer")
 	$TriggerArea.connect("area_exited", self, "lostPlayer")
+	$TriggerArea.connect("body_exited", self, "lostPlayer")
 	$MeleeRange.connect("area_entered", self, "playerMeleeRange")
 
 func _process(delta):
@@ -90,13 +91,13 @@ func playerMeleeRange():
 	currentState = MELEE
 
 func getPlayerRotation():
-	
-	if target.global_position.x - global_position.x < 0:
-		return Vector2.LEFT
-		direction = Vector2.LEFT
-	else:
-		return Vector2.RIGHT
-		direction = Vector2.RIGHT
+	if not target == null:
+		if target.global_position.x - global_position.x < 0:
+			return Vector2.LEFT
+			direction = Vector2.LEFT
+		else:
+			return Vector2.RIGHT
+			direction = Vector2.RIGHT
 
 func changeFlip():
 	if getPlayerRotation() == Vector2.RIGHT:
@@ -106,7 +107,7 @@ func changeFlip():
 		$Sprite.flip_h = true
 		$Fist.position = Vector2(-60, 0)
 
-func lostPlayer():
+func lostPlayer(a):
 	print("lost player")
 	
 	currentState = CLOSE
