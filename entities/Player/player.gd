@@ -54,6 +54,7 @@ func _physics_process(delta):
 		$AnimationPlayer.play("jump")
 		velocity.y -= sqrt(gravity * jump * 2) 
 		doublejump = true
+		print('a')
 
 #	if Input.is_action_just_pressed("jump") and latejumpbuffer and not is_on_floor() :
 #		$AnimationPlayer.play("jump")
@@ -68,22 +69,26 @@ func _physics_process(delta):
 		velocity.y -= sqrt(gravity * jump * 2) 
 		doublejump =false
 		jumpbuffer = false
+		latejumpbuffer = false
+		print('aa')
 
 ##buffering jump input
 	elif Input.is_action_just_pressed("jump") and not is_on_floor() and not doublejump: 
 		jumpbuffer =true
 		$AnimationPlayer.play("jump")
+		print('aaa')
 #a timer so we can buffer the input and delete it if takes longer 0.1 seconds to hit the ground
 		$"jumpbuffer timer".start() 
 
 
 
-	elif latejumpbuffer and Input.is_action_just_pressed("jump"):
+	elif latejumpbuffer and Input.is_action_just_pressed("jump") and not is_on_floor():
 		$AnimationPlayer.play("jump")
 		velocity.y -= sqrt(gravity * jump * 2) 
 		jumpbuffer = false
 		latejumpbuffer = false
 		doublejump = true
+		print('aaaa')
 ##gravity
 	elif not is_on_floor() :
 		velocity.y += gravity * delta 
@@ -94,13 +99,12 @@ func _physics_process(delta):
 		jumpbuffer = false
 		latejumpbuffer = false
 		doublejump = true
-	if not is_on_floor():
+	if is_on_floor():
 		latejumpbuffer = true
 		doublejump = true
 		$"jumpbuffer timer".start()
 	else:
 		latejumpbuffer = false
-		doublejump = false
 #main movement function
 	velocity = move_and_slide(velocity,Vector2.UP) 
 

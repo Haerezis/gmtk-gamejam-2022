@@ -1,16 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://entities/Player/player.gd" type="Script" id=2]
 [ext_resource path="res://entities/HP Logic/HP Logic.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+extents = Vector2( 9, 15 )
 
 [sub_resource type="Animation" id=2]
+resource_name = "idle"
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Icon:scale")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -18,43 +19,43 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ) ]
+"update": 1,
+"values": [ 0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("Icon:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "going left"
 
 [sub_resource type="Animation" id=7]
-resource_name = "going right"
+resource_name = "move"
+length = 0.56
+loop = true
+step = 0.09
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.09, 0.18, 0.27, 0.36, 0.45, 0.54 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 1, 2, 3, 5, 6, 7, 8 ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "jump"
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Icon:scale")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 0.5, 1 ), Vector2( 1, 1 ) ]
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 9 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -62,7 +63,7 @@ resource_name = "lands"
 length = 0.15
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("Icon:scale")
+tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -71,10 +72,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 0.6 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.75 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Icon:position")
+tracks/1/path = NodePath("Sprite:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -83,11 +84,11 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 12 ), Vector2( 0, -6 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 8 ), Vector2( 0, -6 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 32, 2.5 )
+extents = Vector2( 9, 2.125 )
 
 [node name="player" type="KinematicBody2D"]
 collision_layer = 0
@@ -99,7 +100,6 @@ shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
-"anims/going left" = SubResource( 6 )
 "anims/going right" = SubResource( 7 )
 anims/jump = SubResource( 5 )
 anims/lands = SubResource( 3 )
@@ -118,6 +118,8 @@ wait_time = 0.1
 one_shot = true
 
 [node name="Icon" type="Sprite" parent="."]
+position = Vector2( 0, 7.15256e-07 )
+scale = Vector2( 0.25, 0.5 )
 texture = ExtResource( 1 )
 
 [connection signal="body_entered" from="landing" to="." method="_on_landing_body_entered"]
