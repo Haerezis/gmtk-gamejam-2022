@@ -19,6 +19,16 @@ var prevdir = Vector2.ZERO
 
 var state_machine
 
+func _input(event):
+	if event.is_action_pressed("shoot"):
+		get_node("DefaultGun").shoot()
+	if event.is_action_pressed("right"):
+		$DefaultGun.direction = Vector2.RIGHT
+		$DefaultGun.position = Vector2(35, 0)
+	if event.is_action_pressed("left"):
+		$DefaultGun.direction = Vector2.LEFT
+		$DefaultGun.position = Vector2(-35, 0)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
