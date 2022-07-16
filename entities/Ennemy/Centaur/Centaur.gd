@@ -3,7 +3,7 @@ extends KinematicBody2D
 var hp = 10
 
 enum {CLOSE, IDLE, FOLLOW, CHARGE, DASH, MELEE}
-const SPEED = 40
+const SPEED = 60
 
 var currentState = CLOSE
 var direction = Vector2.RIGHT
@@ -69,9 +69,9 @@ func charge():
 var a = 0.05
 func dash():
 	
-	move_and_slide(-direction * SPEED * 30)
+	move_and_slide(-direction * SPEED * 20)
 	dashing = true
-	currentState = FOLLOW 
+	currentState = IDLE 
 	
 	if randf() < a:
 		print("leftdash")
