@@ -69,7 +69,7 @@ func charge():
 var a = 0.05
 func dash():
 	
-	move_and_slide(-direction * SPEED * 20)
+	move_and_slide(direction * SPEED * 20)
 	dashing = true
 	currentState = IDLE 
 	
@@ -101,10 +101,10 @@ func getPlayerRotation():
 
 func changeFlip():
 	if getPlayerRotation() == Vector2.RIGHT:
-		$Sprite.flip_h = false
+		$Sprite.flip_h = true
 		$Fist.position = Vector2(60, 0)
 	else:
-		$Sprite.flip_h = true
+		$Sprite.flip_h = false
 		$Fist.position = Vector2(-60, 0)
 
 func lostPlayer(a):
