@@ -1,9 +1,6 @@
 extends KinematicBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var velocity = Vector2.ZERO
 export var accel = 40 * 60
 export var deaccel = 40 * 90
@@ -15,6 +12,7 @@ export var airspeedmodifer = 2
 export var turnspeed = 100
 var buffering
 var prevdir = Vector2.ZERO
+
 var state_machine
 
 # Called when the node enters the scene tree for the first time.
@@ -22,7 +20,15 @@ func _ready():
     Engine.iterations_per_second = 60
     state_machine = $AnimationTree.get("parameters/playback")
 
+func _input(event):
+	if event.is_action_pressed("shoot"):
+		get_node("DefaultGun").shoot()
 
+func _ready():
+	Engine.iterations_per_second = 60
+	
+	$Hurtbox.connect("damage", self, "get_hit")
+	$IFrame.connect("timeout", self, "breakInvincible")
 
 func _physics_process(delta):
     var dir = Vector2.ZERO
@@ -72,10 +78,27 @@ func _physics_process(delta):
             state_machine.travel("falling")
             print("falling")
 
-func _process(delta):
-    pass
-
 
 func _on_landing_body_entered(body):
-    print("lands")
-    state_machine.travel("lands")
+	print("lands")
+	state_machine.travel("lands")
+
+var hp = 100
+var invincible = false
+export var iframeTime = 1
+
+func get_hit(damage):
+	if not invincible:
+		invincible = true
+		$IFrame.wait_time = iframeTime
+		$IFrame.start()
+		
+		hp -= damage
+		
+		print("oof" + String(hp))
+		
+		if not hp > 0:
+			queue_free()
+
+func breakInvincible():
+	invincible =false
