@@ -223,7 +223,10 @@ radius = 72.0278
 extents = Vector2( 10, 32 )
 
 [node name="Centaur" type="KinematicBody2D"]
+<<<<<<< Updated upstream
 position = Vector2( 592, 404 )
+=======
+>>>>>>> Stashed changes
 scale = Vector2( 0.2, 0.2 )
 script = ExtResource( 2 )
 
