@@ -121,17 +121,17 @@ func _process(delta):
 	if is_on_floor() :
 		if dir.x != 0 :
 			state_machine.travel("move")
-			#print("move")
+			print("move")
 		else :
 			state_machine.travel("idle")
-			#print("idle")
+			print("idle")
 	else :
 		if velocity.y < 0:
 			state_machine.travel("jump")
-			#print("jump")
+			print("jump")
 		elif velocity.y > 0 :
 			state_machine.travel("falling")
-			#print("falling")
+			print("falling")
 
 func _on_landing_body_entered(body):
 	#this variable is here to stop the animation from playing when we first load into the scene
