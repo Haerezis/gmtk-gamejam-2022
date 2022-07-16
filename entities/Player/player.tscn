@@ -2,8 +2,7 @@
 
 [ext_resource path="res://entities/Player/player.gd" type="Script" id=1]
 [ext_resource path="res://entities/Hurtbox/Hurtbox.tscn" type="PackedScene" id=2]
-
-[ext_resource path="res://entities/Gun/PokerChipThrower.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/PokerChipThrower/PokerChipThrower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/Player/BanditRunSheet.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -198,8 +197,8 @@ collision_layer = 2
 position = Vector2( 1, 3.5 )
 shape = SubResource( 6 )
 
-[node name="DefaultGun" parent="." instance=ExtResource( 3 )]
-position = Vector2( 35, 0 )
+[node name="ChipThrower" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 5 )
 
 [node name="IFrame" type="Timer" parent="."]
 

@@ -21,24 +21,19 @@ var state_machine
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
-		get_node("DefaultGun").shoot()
+		$ChipThrower.shoot()
 	if event.is_action_pressed("right"):
-		$DefaultGun.direction = Vector2.RIGHT
-		$DefaultGun.position = Vector2(35, 0)
+		$ChipThrower.direction = Vector2.RIGHT
+		$ChipThrower.position = Vector2(35, 0)
 	if event.is_action_pressed("left"):
-		$DefaultGun.direction = Vector2.LEFT
-		$DefaultGun.position = Vector2(-35, 0)
+		$ChipThrower.direction = Vector2.LEFT
+		$ChipThrower.position = Vector2(-35, 0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 	$Hurtbox.connect("damage", self, "get_hit")
 	$IFrame.connect("timeout", self, "breakInvincible")
-
-
-func _input(event):
-	if event.is_action_pressed("shoot"):
-		get_node("DefaultGun").shoot()
 
 func _process(delta):
 	var dir = Vector2.ZERO
@@ -55,7 +50,7 @@ func _process(delta):
 		velocity.x = clamp(velocity.x,-maxspeed,maxspeed)
 	else :
 		if is_on_floor():
-			velocity.x = move_toward(velocity.x,0,deaccel * delta * 2.5)
+			velocity.x = move_toward(velocity.x, 0,deaccel * delta * 2.5)
 			
 			
 	if Input.is_action_pressed("jump") and is_on_floor(): 
