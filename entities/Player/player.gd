@@ -2,11 +2,11 @@ extends KinematicBody2D
 
 
 var velocity = Vector2.ZERO
-export var shortjumpadjustment = 4
+export var shortjumpadjustment = 3
 export var accel = 40 * 60 * 60
 export var airdeaccel = 20 * 60 * 60
 export var maxspeed = 400
-export var jump = 150 * 60 * 60 * 60
+export var jump = 100
 export var gravity = 100
 export var airspeedmodifer = 2
 export var turnspeed = 100
@@ -76,7 +76,7 @@ func _process(delta):
 	#handling movement for y axis
 	##using the buffered input
 	if jumpbuffer && is_on_floor() : 
-		velocity.y -= gravity * delta * jump * 3
+		velocity.y -= sqrt(2 * gravity * jump)
 		jumpbuffer = false
 		latejumpbuffer = false
 #	# Jump button pressed
@@ -84,11 +84,11 @@ func _process(delta):
 		print("jump")
 		##jumping when on the ground
 		if is_on_floor():
-			velocity.y -= gravity * delta * jump * 3
+			velocity.y -= sqrt(2 * gravity * jump)
 		else :
 			##using the buffered input
 			if latejumpbuffer:
-				velocity.y -= gravity * delta * jump * 3
+				velocity.y -= sqrt(2 * gravity * jump)
 				jumpbuffer = false
 				latejumpbuffer = false
 			else :
@@ -97,13 +97,13 @@ func _process(delta):
 				jumpbuffer = true
 				$"jumpbuffer timer".start() 
 
-# Doesn't work correctly
-#			if velocity.y < 0 :
-#				velocity.y += abs(velocity.y) / shortjumpadjustment
+
 	##gravity
-	else :
+	if not is_on_floor() :
 		velocity.y += gravity * delta 
 
+	if not is_on_floor() and (velocity.y < 0) and Input.is_action_just_released("jump") :
+		velocity.y += abs(velocity.y) / shortjumpadjustment
 	
 	if is_on_floor():
 		latejumpbuffer = true
