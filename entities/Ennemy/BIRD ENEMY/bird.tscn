@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://entities/Ennemy/Centaur/Centaur.gd" type="Script" id=2]
+[ext_resource path="res://entities/Ennemy/BIRD ENEMY/bird enemy.gd" type="Script" id=2]
 [ext_resource path="res://entities/Hitbox/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/Hurtbox/Hurtbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/Ennemy/BIRD ENEMY/projectilelauncher.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -113,22 +114,6 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "MELEE"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Fist/Hitbox/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 1,
-"values": [ true, false, true ]
-}
-
 [sub_resource type="Animation" id=4]
 resource_name = "MOVE"
 tracks/0/type = "value"
@@ -201,18 +186,12 @@ radius = 48.3735
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 33, 32 )
 
-[sub_resource type="CircleShape2D" id=9]
-radius = 2000.0
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 230.5, 188.5 )
 
-[sub_resource type="CircleShape2D" id=10]
-radius = 72.0278
-
-[sub_resource type="RectangleShape2D" id=12]
-extents = Vector2( 10, 32 )
-
-[node name="Centaur" type="KinematicBody2D"]
-scale = Vector2( 0.2, 0.2 )
+[node name="bird" type="KinematicBody2D"]
 script = ExtResource( 2 )
+speeeeed = 6000
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 1, 0, 0, 1 )
@@ -222,11 +201,24 @@ texture = ExtResource( 1 )
 visible = false
 shape = SubResource( 1 )
 
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 32, 0 )
+enabled = true
+cast_to = Vector2( 10, 0 )
+collision_mask = 2
+collide_with_areas = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2( -32, 0 )
+enabled = true
+cast_to = Vector2( -10, 0 )
+collision_mask = 2
+collide_with_areas = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/CHARGE = SubResource( 2 )
 anims/DASH = SubResource( 6 )
 anims/IDLE = SubResource( 3 )
-anims/MELEE = SubResource( 11 )
 anims/MOVE = SubResource( 4 )
 anims/RESET = SubResource( 5 )
 
@@ -244,30 +236,32 @@ shape = SubResource( 8 )
 
 [node name="IFrameTimer" type="Timer" parent="."]
 
-[node name="TriggerArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
+[node name="player detection" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TriggerArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player detection"]
+position = Vector2( 288, 224 )
 shape = SubResource( 9 )
 
-[node name="MeleeRange" type="Area2D" parent="."]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="player detection"]
+position = Vector2( -288, 224 )
+shape = SubResource( 9 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeleeRange"]
-shape = SubResource( 10 )
+[node name="change dir" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
 
-[node name="Fist" type="Node2D" parent="."]
-position = Vector2( 60, 0 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="projectilelauncher" type="Node2D" parent="."]
+script = ExtResource( 5 )
 
-[node name="Hitbox" parent="Fist" instance=ExtResource( 3 )]
+[node name="time between bullets" type="Timer" parent="."]
+wait_time = 6.0
 
-[node name="CollisionShape2D" parent="Fist/Hitbox" index="0"]
-shape = SubResource( 12 )
-disabled = true
+[connection signal="body_entered" from="player detection" to="." method="_on_player_detection_body_entered"]
+[connection signal="body_exited" from="player detection" to="." method="_on_player_detection_body_exited"]
+[connection signal="timeout" from="change dir" to="." method="_on_change_dir_timeout"]
+[connection signal="timeout" from="time between bullets" to="." method="_on_time_between_bullets_timeout"]
 
 [editable path="Hitbox"]
 [editable path="Hurtbox"]
-[editable path="Fist/Hitbox"]
