@@ -1,8 +1,4 @@
 extends Button
 
-
-func _ready():
-	pass
-
-func _on_Quit_button_down():
+func _on_Quit_pressed():
 	get_tree().quit()
