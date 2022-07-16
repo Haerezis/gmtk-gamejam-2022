@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://entities/Player/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://entities/Ennemy/prototype/Prototype.tscn" type="PackedScene" id=3]
-[ext_resource path="res://entities/Platforms/Vanishing/VanishingPlatform.tscn" type="PackedScene" id=5]
+[ext_resource path="res://entities/Ennemy/Centaur/Centaur.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 28.5, 30 )
@@ -11,7 +10,7 @@ extents = Vector2( 28.5, 30 )
 [node name="TestWorld" type="Node2D"]
 
 [node name="BigPlatform" type="StaticBody2D" parent="."]
-position = Vector2( 0, 528 )
+position = Vector2( 1235, 707 )
 scale = Vector2( 50, 1 )
 __meta__ = {
 "_edit_group_": true
@@ -25,35 +24,15 @@ position = Vector2( 0.5, -1 )
 shape = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -992, 386 )
+position = Vector2( 858, 585 )
 jump = 10
 
 [node name="Bullets" type="Node2D" parent="."]
 
-[node name="VanishingPlatform" parent="." instance=ExtResource( 5 )]
-position = Vector2( -604, 425 )
-
-[node name="VanishingPlatform2" parent="." instance=ExtResource( 5 )]
-position = Vector2( -246, 339 )
-canVanish = true
-timeBeforeVanish = 0.5
-
-[node name="VanishingPlatform3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 148, 335 )
-canVanish = true
-timeBeforeVanish = 0.5
-
-[node name="VanishingPlatform4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 576, 329 )
-canVanish = true
-timeBeforeVanish = 0.5
-
-[node name="VanishingPlatform5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 968, 449 )
-
-[node name="EnemyPrototype" parent="VanishingPlatform5" instance=ExtResource( 3 )]
-position = Vector2( -2177, 8 )
+[node name="Centaur" parent="." instance=ExtResource( 3 )]
+position = Vector2( 1404, 646 )
 
 [node name="Camera2D(This is not final)" type="Camera2D" parent="."]
+position = Vector2( 1107, 478 )
 current = true
-zoom = Vector2( 2, 2 )
+zoom = Vector2( 0.7, 0.7 )

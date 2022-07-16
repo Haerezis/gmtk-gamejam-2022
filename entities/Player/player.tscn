@@ -193,15 +193,15 @@ shape = SubResource( 4 )
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
 collision_layer = 2
 
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( 1, 3.5 )
+shape = SubResource( 6 )
+
 [node name="HP Logic" parent="." instance=ExtResource( 3 )]
 
 [node name="jumpbuffer timer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
-
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2( 1, 3.5 )
-shape = SubResource( 6 )
 
 [node name="ChipThrower" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 5 )
@@ -209,8 +209,6 @@ position = Vector2( 0, 5 )
 [node name="IFrame" type="Timer" parent="."]
 
 [connection signal="body_entered" from="landing" to="." method="_on_landing_body_entered"]
-[connection signal="die" from="HP Logic" to="." method="_on_HP_Logic_die"]
-[connection signal="iframes" from="HP Logic" to="." method="_on_HP_Logic_iframes"]
 [connection signal="timeout" from="jumpbuffer timer" to="." method="_on_Timer_timeout"]
 
 [editable path="Hurtbox"]
