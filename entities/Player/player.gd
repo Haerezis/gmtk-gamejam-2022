@@ -5,59 +5,29 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 var velocity = Vector2.ZERO
-export var shortjumpadjustment = 3
-export var accel = 40 * 60 * 60
-export var airdeaccel = 20 * 60 * 60
+export var shortjumpadjustment = 4
+export var accel = 40 * 60
+export var airdeaccel = 20*60
 export var maxspeed = 400
-export var jump = 100
-export var gravity = 100
+export var jump = 150
+export var gravity = 100 * 60
 export var airspeedmodifer = 2
 export var turnspeed = 100
 var StopLandingAnimWhenFirstStart = false
+var doublejump = false
 var jumpbuffer =false
 var latejumpbuffer =false
-
 # Called when the node enters the scene tree for the first time.
-<<<<<<< HEAD
-=======
-
-var hp = 100
-var invincible = false
-export var iframeTime = 1
-
-var buffering
-var prevdir = Vector2.ZERO
-
-var state_machine
-
-func _input(event):
-	if event.is_action_pressed("shoot"):
-		$ChipThrower.shoot()
-	if event.is_action_pressed("right"):
-		$ChipThrower.direction = Vector2.RIGHT
-		$ChipThrower.position = Vector2(35, 0)
-	if event.is_action_pressed("left"):
-		$ChipThrower.direction = Vector2.LEFT
-		$ChipThrower.position = Vector2(-35, 0)
-
-
-
-# Called when the node enters the scene tree for the first time.
->>>>>>> main
 func _ready():
 	Engine.iterations_per_second = 60
 	Engine.time_scale = 1
 
 
 
-<<<<<<< HEAD
 func _physics_process(delta):
-=======
-func _process(delta):
->>>>>>> main
 #getting the movement direction
 	var dir = Vector2.ZERO
-	dir.x = (Input.get_action_strength("right") - Input.get_action_strength("left"))
+	dir.x = (Input.get_action_strength("right") - Input.get_action_strength("left")) * delta
 
  #making the player turn faster when going the other direction
 	if velocity.x > 0 and Input.is_action_just_pressed("left") and not Input.is_action_just_pressed("right"):
@@ -78,7 +48,6 @@ func _process(delta):
 			velocity.x = move_toward(velocity.x,0,accel * delta * 3)
 		else:
 			velocity.x = move_toward(velocity.x,0,airdeaccel * delta)
-<<<<<<< HEAD
 #handling movement for y axis
 ##jumping when on the ground
 	if Input.is_action_just_pressed("jump") and is_on_floor() and not jumpbuffer and latejumpbuffer == false :
@@ -116,38 +85,13 @@ func _process(delta):
 	elif latejumpbuffer and Input.is_action_just_pressed("jump") and not is_on_floor():
 		$AnimationPlayer.play("jump")
 		velocity.y -= sqrt(gravity * jump * 2) 
-=======
-
-	#handling movement for y axis
-	##using the buffered input
-	if jumpbuffer && is_on_floor() : 
-		velocity.y -= sqrt(2 * gravity * jump)
->>>>>>> main
 		jumpbuffer = false
 		latejumpbuffer = false
-#	# Jump button pressed
-	if Input.is_action_just_pressed("jump"):
-		print("jump")
-		##jumping when on the ground
-		if is_on_floor():
-			velocity.y -= sqrt(2 * gravity * jump)
-		else :
-			##using the buffered input
-			if latejumpbuffer:
-				velocity.y -= sqrt(2 * gravity * jump)
-				jumpbuffer = false
-				latejumpbuffer = false
-			else :
-				#buffering jump input
-				#with a timer so we can buffer the input and delete it if takes longer 0.1 seconds to hit the ground
-				jumpbuffer = true
-				$"jumpbuffer timer".start() 
-
-
-	##gravity
-	if not is_on_floor() :
+		doublejump = true
+		print('aaaa')
+##gravity
+	elif not is_on_floor() :
 		velocity.y += gravity * delta 
-<<<<<<< HEAD
 ##using the buffered input
 	elif jumpbuffer and is_on_floor() : 
 		$AnimationPlayer.play("jump")
@@ -155,42 +99,16 @@ func _process(delta):
 		jumpbuffer = false
 		latejumpbuffer = false
 		doublejump = true
-=======
-
-	if not is_on_floor() and (velocity.y < 0) and Input.is_action_just_released("jump") :
-		velocity.y += abs(velocity.y) / shortjumpadjustment
-	
->>>>>>> main
 	if is_on_floor():
 		latejumpbuffer = true
+		doublejump = true
 		$"jumpbuffer timer".start()
-	
-	
-	#main movement function
+	else:
+		latejumpbuffer = false
+#main movement function
 	velocity = move_and_slide(velocity,Vector2.UP) 
 
-<<<<<<< HEAD
 
-=======
-
-	if is_on_floor() :
-		if dir.x != 0 :
-			state_machine.travel("move")
-			print("move")
-		else :
-			state_machine.travel("idle")
-			print("idle")
-	else :
-		if velocity.y < 0:
-			state_machine.travel("jump")
-			print("jump")
-		elif velocity.y > 0 :
-			state_machine.travel("falling")
-			print("falling")
-
-
-
->>>>>>> main
 #registering the ground so we can play the "lands" animation
 func _on_landing_body_entered(body):
 #this variable is here to stop the animation from playing when we first load into the scene
@@ -208,8 +126,6 @@ func _on_Timer_timeout():
 #on player death respawn
 func _on_HP_Logic_die():
 	respawn()
-<<<<<<< HEAD
-
 var hp = 10
 
 func respawn():
@@ -234,11 +150,6 @@ func get_hit(damage):
 		
 		if not hp > 0:
 			queue_free()
-=======
-	
-func respawn():
-	pass
->>>>>>> main
 
 func breakInvincible():
 	invincible =false

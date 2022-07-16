@@ -16,19 +16,20 @@ config/icon="res://icon.png"
 
 [display]
 
-<<<<<<< HEAD
-window/size/width=1920
+window/size/width=1280
 window/size/height=1080
+window/size/borderless=true
 window/size/test_width=1024
 window/size/test_height=600
-=======
-window/size/width=1280
-window/size/height=720
-window/size/borderless=true
->>>>>>> main
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
 <<<<<<<HEADwindow/size/width=1920
+
+[importer_defaults]
+
+texture={
+"flags/filter": false
+}
 
 [input]
 
@@ -49,9 +50,6 @@ jump={
 }
 shoot={
 "deadzone": 0.5,
-<<<<<<< HEAD
-"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":74,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
-=======
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":70,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
@@ -64,7 +62,6 @@ shoot={
 "time negative"={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":9,"pressed":false,"doubleclick":false,"script":null)
->>>>>>> main
  ]
 }
 
