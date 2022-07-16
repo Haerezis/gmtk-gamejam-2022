@@ -2,7 +2,7 @@
 
 [ext_resource path="res://entities/Player/player.gd" type="Script" id=1]
 [ext_resource path="res://entities/Hurtbox/Hurtbox.tscn" type="PackedScene" id=2]
-[ext_resource path="res://entities/Gun/Gun.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/PokerChipThrower/PokerChipThrower.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/Player/BanditRunSheet.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -20,7 +20,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 10 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -67,10 +67,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1, 0.75 ), Vector2( 1, 1.2 ), Vector2( 1, 1 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.95 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Sprite:position")
@@ -79,10 +79,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 8 ), Vector2( 0, -6 ), Vector2( 0, 0 ) ]
+"values": [ Vector2( 0, 0 ), Vector2( 0, 2 ), Vector2( 0, 0 ) ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -161,8 +161,10 @@ collision_layer = 0
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, 2 )
+scale = Vector2( 1, 0.95 )
 texture = ExtResource( 4 )
-hframes = 10
+hframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1, 1 )
@@ -195,8 +197,8 @@ collision_layer = 2
 position = Vector2( 1, 3.5 )
 shape = SubResource( 6 )
 
-[node name="DefaultGun" parent="." instance=ExtResource( 3 )]
-position = Vector2( 35, 0 )
+[node name="ChipThrower" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 5 )
 
 [node name="IFrame" type="Timer" parent="."]
 
