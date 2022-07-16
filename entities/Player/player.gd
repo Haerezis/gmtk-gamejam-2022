@@ -56,7 +56,7 @@ func _on_landing_body_entered(body):
 	else:
 		firstly = true
 
-var hp = 10
+var hp = 100
 var invincible = false
 export var iframeTime = 1
 

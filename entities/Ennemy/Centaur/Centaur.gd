@@ -32,6 +32,8 @@ func _process(delta):
 			charge()
 		DASH:
 			dash(delta)
+	
+	move_and_slide(Vector2(0, 400))
 
 func randomise(array : Array):
 	array.shuffle()
@@ -70,7 +72,6 @@ func dash(delta):
 	
 	for i in 3:
 		position += direction * SPEED * delta 
-	
 	
 	currentState = IDLE
 	charging = false
