@@ -10,3 +10,6 @@ func _physics_process(delta):
 	
 	if distance > maxDistance:
 		queue_free()
+
+func _on_Hitbox_area_entered(area):
+	queue_free()
