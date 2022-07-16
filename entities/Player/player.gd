@@ -16,10 +16,11 @@ export var turnspeed = 100
 var StopLandingAnimWhenFirstStart = false
 var doublejump = false
 var jumpbuffer =false
+var latejumpbuffer =false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Engine.iterations_per_second = 60
-	
+	Engine.time_scale = 1
 
 
 
@@ -49,16 +50,20 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x,0,airdeaccel * delta)
 #handling movement for y axis
 ##jumping when on the ground
-	if Input.is_action_just_pressed("jump") and is_on_floor() and not jumpbuffer: 
+	if Input.is_action_just_pressed("jump") and is_on_floor() and not jumpbuffer and latejumpbuffer == false :
 		$AnimationPlayer.play("jump")
 		velocity.y -= sqrt(gravity * jump * 2) 
 		doublejump = true
+
+#	if Input.is_action_just_pressed("jump") and latejumpbuffer and not is_on_floor() :
+#		$AnimationPlayer.play("jump")
+#		velocity.y -= sqrt(gravity * jump * 2) 
 
 	if not is_on_floor() and velocity.y < 0 and Input.is_action_just_released("jump") :
 		velocity.y += abs(velocity.y) / shortjumpadjustment
 
 ##double jump
-	elif doublejump and Input.is_action_just_pressed("jump") and not is_on_floor()  : 
+	elif doublejump and Input.is_action_just_pressed("jump") and not is_on_floor() and latejumpbuffer == false : 
 		$AnimationPlayer.play("jump")
 		velocity.y -= sqrt(gravity * jump * 2) 
 		doublejump =false
@@ -67,17 +72,35 @@ func _physics_process(delta):
 ##buffering jump input
 	elif Input.is_action_just_pressed("jump") and not is_on_floor() and not doublejump: 
 		jumpbuffer =true
+		$AnimationPlayer.play("jump")
 #a timer so we can buffer the input and delete it if takes longer 0.1 seconds to hit the ground
 		$"jumpbuffer timer".start() 
 
+
+
+	elif latejumpbuffer and Input.is_action_just_pressed("jump"):
+		$AnimationPlayer.play("jump")
+		velocity.y -= sqrt(gravity * jump * 2) 
+		jumpbuffer = false
+		latejumpbuffer = false
+		doublejump = true
 ##gravity
 	elif not is_on_floor() :
 		velocity.y += gravity * delta 
 ##using the buffered input
-	elif jumpbuffer and is_on_floor(): 
+	elif jumpbuffer and is_on_floor() : 
+		$AnimationPlayer.play("jump")
 		velocity.y -= sqrt(gravity * jump * 2) 
 		jumpbuffer = false
+		latejumpbuffer = false
 		doublejump = true
+	if not is_on_floor():
+		latejumpbuffer = true
+		doublejump = true
+		$"jumpbuffer timer".start()
+	else:
+		latejumpbuffer = false
+		doublejump = false
 #main movement function
 	velocity = move_and_slide(velocity,Vector2.UP) 
 
@@ -93,6 +116,7 @@ func _on_landing_body_entered(body):
 # removing the buffer because it took more than 0.1 seconds
 func _on_Timer_timeout():
 	jumpbuffer = false
+	latejumpbuffer = false
 
 
 #on player death respawn
