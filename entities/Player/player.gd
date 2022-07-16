@@ -1,9 +1,5 @@
 extends KinematicBody2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var velocity = Vector2.ZERO
 export var shortjumpadjustment = 4
 export var accel = 40 * 60
@@ -29,7 +25,7 @@ func _physics_process(delta):
 	var dir = Vector2.ZERO
 	dir.x = (Input.get_action_strength("right") - Input.get_action_strength("left")) * delta
 
- #making the player turn faster when going the other direction
+#making the player turn faster when going the other direction
 	if velocity.x > 0 and Input.is_action_just_pressed("left") and not Input.is_action_just_pressed("right"):
 		dir.x = 1 * turnspeed
 	if velocity.x < 0 and Input.is_action_just_pressed("right") and not Input.is_action_just_pressed("left"): 
@@ -50,17 +46,16 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x,0,airdeaccel * delta)
 #handling movement for y axis
 ##jumping when on the ground
-	if Input.is_action_just_pressed("jump") and is_on_floor() and not jumpbuffer and latejumpbuffer == false :
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		$AnimationPlayer.play("jump")
 		velocity.y -= sqrt(gravity * jump * 2) 
 		doublejump = true
-		print('a')
 
 #	if Input.is_action_just_pressed("jump") and latejumpbuffer and not is_on_floor() :
 #		$AnimationPlayer.play("jump")
 #		velocity.y -= sqrt(gravity * jump * 2) 
 
-	if not is_on_floor() and velocity.y < 0 and Input.is_action_just_released("jump") :
+	elif not is_on_floor() and velocity.y < 0 and Input.is_action_just_released("jump") :
 		velocity.y += abs(velocity.y) / shortjumpadjustment
 
 ##double jump
@@ -70,13 +65,11 @@ func _physics_process(delta):
 		doublejump =false
 		jumpbuffer = false
 		latejumpbuffer = false
-		print('aa')
 
 ##buffering jump input
 	elif Input.is_action_just_pressed("jump") and not is_on_floor() and not doublejump: 
 		jumpbuffer =true
 		$AnimationPlayer.play("jump")
-		print('aaa')
 #a timer so we can buffer the input and delete it if takes longer 0.1 seconds to hit the ground
 		$"jumpbuffer timer".start() 
 
@@ -88,10 +81,9 @@ func _physics_process(delta):
 		jumpbuffer = false
 		latejumpbuffer = false
 		doublejump = true
-		print('aaaa')
 ##gravity
 	elif not is_on_floor() :
-		velocity.y += gravity * delta 
+		velocity.y += gravity * delta
 ##using the buffered input
 	elif jumpbuffer and is_on_floor() : 
 		$AnimationPlayer.play("jump")
@@ -116,7 +108,7 @@ func _on_landing_body_entered(body):
 		$AnimationPlayer.play("lands")
 	else :
 		StopLandingAnimWhenFirstStart = true
-
+		
 # removing the buffer because it took more than 0.1 seconds
 func _on_Timer_timeout():
 	jumpbuffer = false
@@ -126,31 +118,11 @@ func _on_Timer_timeout():
 #on player death respawn
 func _on_HP_Logic_die():
 	respawn()
-var hp = 10
+
 
 func respawn():
 	pass
 
 
 func _on_HP_Logic_iframes():
-	pass # Replace with function body.
-
-var invincible = false
-export var iframeTime = 1.0
-
-func get_hit(damage):
-	if not invincible:
-		invincible = true
-		$IFrame.wait_time = iframeTime
-		$IFrame.start()
-		
-		hp -= damage
-		
-		print("oof" + String(hp))
-		
-		if not hp > 0:
-			queue_free()
-
-func breakInvincible():
-	invincible =false
-
+	pass # Replace with function body
