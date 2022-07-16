@@ -32,6 +32,6 @@ jump = 10
 [node name="Centaur" parent="." instance=ExtResource( 4 )]
 position = Vector2( -7, 454 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D(This is not final)" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 3, 3 )

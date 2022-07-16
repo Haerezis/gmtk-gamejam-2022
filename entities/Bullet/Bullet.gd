@@ -1,10 +1,11 @@
 extends KinematicBody2D
 
-var maxDistance = 350
+var direction
+export var maxDistance = 400
 var distance : int
 
 func _physics_process(delta):
-	position.x += 10
+	position += direction * 10
 	distance += 10
 	
 	if distance > maxDistance:
