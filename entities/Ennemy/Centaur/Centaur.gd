@@ -18,7 +18,7 @@ func _ready():
 	$IFrameTimer.connect("timeout", self, "breakInvincible")
 
 func _process(delta):
-	if checkPlayer():
+	if checkPlayer() and not charging:
 		currentState = CHARGE
 	
 	match currentState:
@@ -44,12 +44,12 @@ func idle():
 	currentState = MOVE
 
 func move(delta):
-	
-	for i in 3:
-		position += direction * SPEED * delta / 2
-		animPlayer.play("MOVE")
-	
-	currentState = CHANGE
+	if not charging:
+		for i in 3:
+			position += direction * SPEED * delta / 2
+			animPlayer.play("MOVE")
+		
+		currentState = CHANGE
 
 func newDirection():
 	direction = randomise([Vector2.RIGHT, Vector2.LEFT])
@@ -69,7 +69,7 @@ func charge():
 func dash(delta):
 	
 	for i in 3:
-		position += direction * SPEED * delta * 2
+		position += direction * SPEED * delta 
 	
 	
 	currentState = IDLE
