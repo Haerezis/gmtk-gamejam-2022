@@ -16,6 +16,12 @@ var prevdir = Vector2.ZERO
 func _input(event):
 	if event.is_action_pressed("shoot"):
 		get_node("DefaultGun").shoot()
+	if event.is_action_pressed("right"):
+		$DefaultGun.direction = Vector2.RIGHT
+		$DefaultGun.position = Vector2(35, 0)
+	if event.is_action_pressed("left"):
+		$DefaultGun.direction = Vector2.LEFT
+		$DefaultGun.position = Vector2(-35, 0)
 
 func _ready():
 	Engine.iterations_per_second = 60
