@@ -10,10 +10,5 @@ var dice = preload("res://entities/D6 Power/D6.tscn")
 func _ready():
 	var dice_node = dice.instance()
 	dice_node.position = Vector2(500, 500)
-	dice_node.init(10, $Camera2D)
+	dice_node.init(5, $Camera2D)
 	add_child(dice_node)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass

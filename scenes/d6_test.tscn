@@ -11,10 +11,10 @@ pause_mode = 1
 script = ExtResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 960, 540 )
+position = Vector2( 644, 362 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2( 956, 920 )
+position = Vector2( 725, 666 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 0.499969, 1 )
