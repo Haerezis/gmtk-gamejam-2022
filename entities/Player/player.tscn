@@ -210,7 +210,8 @@ position = Vector2( 0, 5 )
 
 [node name="IFrame" type="Timer" parent="."]
 
-[node name="SpecialAttackScript" type="Node" parent="."]
+[node name="SpecialAttack" type="Node2D" parent="."]
+position = Vector2( 14, 6 )
 script = ExtResource( 5 )
 
 [connection signal="body_entered" from="landing" to="." method="_on_landing_body_entered"]
