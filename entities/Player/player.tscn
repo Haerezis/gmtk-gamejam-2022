@@ -6,7 +6,7 @@
 [ext_resource path="res://entities/Player/BanditRunSheet.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9, 15 )
+extents = Vector2( 9, 16 )
 
 [sub_resource type="Animation" id=8]
 resource_name = "falling"
@@ -154,10 +154,11 @@ graph_offset = Vector2( 0, -65.166 )
 extents = Vector2( 9, 2.125 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 9, 17.5 )
+extents = Vector2( 9, 16.75 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 0
+collision/safe_margin = 0.001
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -167,7 +168,7 @@ texture = ExtResource( 4 )
 hframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, 1 )
+position = Vector2( 1, 5 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -194,7 +195,11 @@ shape = SubResource( 4 )
 collision_layer = 2
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
+<<<<<<< HEAD
 position = Vector2( 1, 3.5 )
+=======
+position = Vector2( 1, 5.25 )
+>>>>>>> main
 shape = SubResource( 6 )
 
 [node name="HP Logic" parent="." instance=ExtResource( 3 )]
