@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 
 export var damage = 10
@@ -6,15 +6,10 @@ export var speed = 1
 export var number_of_bounce = 10
 
 var value
-var from = Vector2.ZERO
-var to = Vector2.ZERO
+var camera
 
 var initial_direction
 var velocity = Vector2.ZERO
-
-var active = false
-
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -25,6 +20,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var next_position = self.position + velocity * delta
+	
+	var from = camera.get_camera_screen_center()
+	var to = from + get_viewport().size
 	
 	if next_position.x < from.x or next_position.x > to.x:
 		velocity.x = -velocity.x
@@ -39,20 +37,11 @@ func _process(delta):
 	self.position += velocity * delta
 
 
-func init(value, from, to):
+func init(value, camera):
 	self.value = value
-	self.from = from
-	self.to = to
+	self.camera = camera
 	
-	set_collision_mask_bit(2, true)
-	if value == 1:
-		set_collision_mask_bit(1, true)
-	
-	active = true
-
-
-
-
-func _on_D20_area_entered(object):
-	if object.has_method("hit"):
-		object.hit(damage)
+	# player layer
+	$Hitbox.set_collision_mask_bit(1, (value == 1))
+	# ennemy layer
+	$Hitbox.set_collision_mask_bit(2, true)

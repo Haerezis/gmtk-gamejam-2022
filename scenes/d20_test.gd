@@ -4,11 +4,14 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export(NodePath) var d20
+var d20 = preload("res://entities/D20 Power/D20.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node(d20).init(12, Vector2(0,0), Vector2(1920,1080))
+	var d20_node = d20.instance()
+	d20_node.position = Vector2(500, 500)
+	d20_node.init(10, $Camera2D)
+	add_child(d20_node)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
