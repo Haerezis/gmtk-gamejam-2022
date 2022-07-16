@@ -45,11 +45,6 @@ func _physics_process(delta):
 	prevdir = dir
 	velocity = move_and_slide(velocity,Vector2.UP)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
 func _on_landing_body_entered(body):
 	if firstly:
 		$AnimationPlayer.play("lands")
