@@ -1,9 +1,6 @@
 extends KinematicBody2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 var velocity = Vector2.ZERO
 export var shortjumpadjustment = 4
 export var accel = 40 * 60
@@ -18,13 +15,33 @@ var doublejump = false
 var jumpbuffer =false
 var latejumpbuffer =false
 # Called when the node enters the scene tree for the first time.
+
+var hp = 100
+var invincible = false
+export var iframeTime = 1
+
+var buffering
+var prevdir = Vector2.ZERO
+
+var state_machine
+
+func _input(event):
+	if event.is_action_pressed("shoot"):
+		$ChipThrower.shoot()
+	if event.is_action_pressed("right"):
+		$ChipThrower.direction = Vector2.RIGHT
+		$ChipThrower.position = Vector2(35, 0)
+	if event.is_action_pressed("left"):
+		$ChipThrower.direction = Vector2.LEFT
+		$ChipThrower.position = Vector2(-35, 0)
+
+# Called when the node enters the scene tree for the first time.
 func _ready():
-	Engine.iterations_per_second = 60
-	Engine.time_scale = 1
+	state_machine = $AnimationTree.get("parameters/playback")
+	$Hurtbox.connect("damage", self, "get_hit")
+	$IFrame.connect("timeout", self, "breakInvincible")
 
-
-
-func _physics_process(delta):
+func _process(delta):
 #getting the movement direction
 	var dir = Vector2.ZERO
 	dir.x = (Input.get_action_strength("right") - Input.get_action_strength("left")) * delta
@@ -36,11 +53,14 @@ func _physics_process(delta):
 		dir.x = -1 * turnspeed
 
 #handling movement for x axis
-	if not dir == Vector2.ZERO : 
+	if not dir == Vector2.ZERO :
+		$Sprite.flip_h = (dir.x < 0)
+		
 		if is_on_floor():
-			velocity.x += dir.x * accel
+			velocity.x += dir.x * accel * delta
 		else:
-			velocity.x += (dir.x * accel) / airspeedmodifer
+			velocity.x += (dir.x * accel * delta) / airspeedmodifer
+			
 		velocity.x = clamp(velocity.x,-maxspeed,maxspeed)
 #making the player slow down when touching the ground
 	else :
@@ -51,39 +71,28 @@ func _physics_process(delta):
 #handling movement for y axis
 ##jumping when on the ground
 	if Input.is_action_just_pressed("jump") and is_on_floor() and not jumpbuffer and latejumpbuffer == false :
-		$AnimationPlayer.play("jump")
 		velocity.y -= sqrt(gravity * jump * 2) 
 		doublejump = true
-		print('a')
-
-#	if Input.is_action_just_pressed("jump") and latejumpbuffer and not is_on_floor() :
-#		$AnimationPlayer.play("jump")
-#		velocity.y -= sqrt(gravity * jump * 2) 
 
 	if not is_on_floor() and velocity.y < 0 and Input.is_action_just_released("jump") :
 		velocity.y += abs(velocity.y) / shortjumpadjustment
 
 ##double jump
-	elif doublejump and Input.is_action_just_pressed("jump") and not is_on_floor() and latejumpbuffer == false : 
-		$AnimationPlayer.play("jump")
-		velocity.y -= sqrt(gravity * jump * 2) 
-		doublejump =false
-		jumpbuffer = false
-		latejumpbuffer = false
-		print('aa')
+#	elif doublejump and Input.is_action_just_pressed("jump") and not is_on_floor() and latejumpbuffer == false : 
+#		velocity.y -= sqrt(gravity * jump * 2) 
+#		doublejump =false
+#		jumpbuffer = false
+#		latejumpbuffer = false
 
 ##buffering jump input
 	elif Input.is_action_just_pressed("jump") and not is_on_floor() and not doublejump: 
 		jumpbuffer =true
-		$AnimationPlayer.play("jump")
-		print('aaa')
 #a timer so we can buffer the input and delete it if takes longer 0.1 seconds to hit the ground
 		$"jumpbuffer timer".start() 
 
 
 
 	elif latejumpbuffer and Input.is_action_just_pressed("jump") and not is_on_floor():
-		$AnimationPlayer.play("jump")
 		velocity.y -= sqrt(gravity * jump * 2) 
 		jumpbuffer = false
 		latejumpbuffer = false
@@ -92,6 +101,7 @@ func _physics_process(delta):
 ##gravity
 	elif not is_on_floor() :
 		velocity.y += gravity * delta 
+	
 ##using the buffered input
 	elif jumpbuffer and is_on_floor() : 
 		$AnimationPlayer.play("jump")
@@ -108,12 +118,26 @@ func _physics_process(delta):
 #main movement function
 	velocity = move_and_slide(velocity,Vector2.UP) 
 
+	if is_on_floor() :
+		if dir.x != 0 :
+			state_machine.travel("move")
+			print("move")
+		else :
+			state_machine.travel("idle")
+			print("idle")
+	else :
+		if velocity.y < 0:
+			state_machine.travel("jump")
+			print("jump")
+		elif velocity.y > 0 :
+			state_machine.travel("falling")
+			print("falling")
 
-#registering the ground so we can play the "lands" animation
 func _on_landing_body_entered(body):
-#this variable is here to stop the animation from playing when we first load into the scene
+	#this variable is here to stop the animation from playing when we first load into the scene
 	if StopLandingAnimWhenFirstStart : 
-		$AnimationPlayer.play("lands")
+		print("lands")
+		state_machine.travel("lands")
 	else :
 		StopLandingAnimWhenFirstStart = true
 
@@ -122,15 +146,19 @@ func _on_Timer_timeout():
 	jumpbuffer = false
 	latejumpbuffer = false
 
+func get_hit(damage):
+	if not invincible:
+		invincible = true
+		$IFrame.wait_time = iframeTime
+		$IFrame.start()
+		
+		hp -= damage
+		
+		print("oof" + String(hp))
+		
+		if not hp > 0:
+			queue_free()
 
-#on player death respawn
-func _on_HP_Logic_die():
-	respawn()
+func breakInvincible():
+	invincible =false
 
-
-func respawn():
-	pass
-
-
-func _on_HP_Logic_iframes():
-	pass # Replace with function body.
