@@ -1,9 +1,9 @@
 extends KinematicBody2D
 
-var hp = 10
+export var hp = 40
 
 enum {CLOSE, IDLE, FOLLOW, CHARGE, DASH, MELEE}
-const SPEED = 60
+export var SPEED = 50
 
 var currentState = CLOSE
 var direction = Vector2.RIGHT
@@ -22,7 +22,7 @@ func _ready():
 	$TriggerArea.connect("area_entered", self, "seenPlayer")
 	$TriggerArea.connect("area_exited", self, "lostPlayer")
 	$TriggerArea.connect("body_exited", self, "lostPlayer")
-	$MeleeRange.connect("area_entered", self, "playerMeleeRange")
+	#$MeleeRange.connect("area_entered", self, "playerMeleeRange")
 
 func _process(delta):
 	match currentState:
@@ -44,18 +44,25 @@ func seenPlayer(p):
 	currentState = IDLE
 
 func idle():
+	animPlayer.play("IDLE")
 	if randf() < 0.7:
 		currentState = FOLLOW
 	else:
 		pass
 
+var b = 0.0005
 func follow():
 	changeFlip()
+	
 	move_and_slide(getPlayerRotation() * SPEED)
-	if randf() < 0.005:
+	
+	
+	animPlayer.play("MOVE")
+	if randf() < b:
 		currentState = CHARGE
+		b = 0.0005
 	else:
-		pass
+		b += 0.0001
 
 var chargeOnce = false
 func charge():
@@ -63,26 +70,32 @@ func charge():
 		print("charge")
 		chargeOnce = true
 		animPlayer.play("CHARGE")
+		direction = getPlayerRotation()
 		yield(get_tree().create_timer(1.0), "timeout")
 		currentState = DASH
 
 var a = 0.05
+var dashDuration : float
+export var minDashDuration = 10
 func dash():
 	
+	animPlayer.play("DASH")
+	
 	move_and_slide(direction * SPEED * 20)
+	
 	dashing = true
 	currentState = IDLE 
 	
-	if randf() < a:
-		print("leftdash")
+	if randf() < a and dashDuration > minDashDuration:
 		currentState = FOLLOW
 		dashing = false
 		chargeOnce = false
+		dashDuration = 0
 		a = 0.05
 	else:
 		a += 0.05
+		dashDuration += 1
 		currentState = DASH
-		print("dash")
 
 func melee():
 	animPlayer.play("MELEE")
@@ -92,12 +105,14 @@ func playerMeleeRange():
 
 func getPlayerRotation():
 	if not target == null:
-		if target.global_position.x - global_position.x < 0:
-			return Vector2.LEFT
-			direction = Vector2.LEFT
-		else:
-			return Vector2.RIGHT
-			direction = Vector2.RIGHT
+		#print(global_position.x - target.global_position.x)
+		
+		if global_position.x - target.global_position.x < 0:
+			return Vector2(1, 0)
+			#direction = Vector2(1, 0)
+		elif global_position.x - target.global_position.x > 0:
+			return Vector2(-1, 0)
+			#direction = Vector2(-1, 0)
 
 func changeFlip():
 	if getPlayerRotation() == Vector2.RIGHT:
@@ -110,8 +125,8 @@ func changeFlip():
 func lostPlayer(a):
 	print("lost player")
 	
-	currentState = CLOSE
-	target = null
+	#currentState = CLOSE
+	#target = null
 
 var invincible = false
 export var iframeTime = 1.0
