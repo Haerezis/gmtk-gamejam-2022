@@ -253,9 +253,26 @@ position = Vector2( 12134, 287 )
 
 [node name="Birds" type="Node2D" parent="."]
 
-[node name="BirdPlaceholder7" type="Sprite" parent="Birds"]
-position = Vector2( 7694, 155 )
-texture = ExtResource( 6 )
+[node name="bird" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 3200, 216 )
+
+[node name="bird2" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 3369, 216 )
+
+[node name="bird3" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 4021, 198 )
+
+[node name="bird4" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 5508, 157 )
+
+[node name="bird5" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 5615, 217 )
+
+[node name="bird6" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 7085, 254 )
+
+[node name="bird7" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 7600, 154 )
 
 [node name="bird8" parent="Birds" instance=ExtResource( 20 )]
 position = Vector2( 7733, 168 )
@@ -325,6 +342,9 @@ position = Vector2( 9682, 280 )
 [node name="Chest" parent="." instance=ExtResource( 5 )]
 position = Vector2( 13805, 138 )
 
+[node name="Centaur" parent="." instance=ExtResource( 21 )]
+position = Vector2( 495, 251 )
+
 [connection signal="cooldowns" from="player" to="HUD" method="set_cooldowns"]
 [connection signal="hit_points" from="player" to="HUD" method="set_current_health"]
 [connection signal="throw_d6" from="player" to="HUD" method="use_d6"]
@@ -334,6 +354,3 @@ position = Vector2( 13805, 138 )
 [editable path="Checkpoints/Checkpoint"]
 [editable path="Checkpoints/Checkpoint7"]
 [editable path="Checkpoints/Checkpoint8"]
-
-[node name="Centaur" parent="." instance=ExtResource( 21 )]
-position = Vector2( 495, 251 )
