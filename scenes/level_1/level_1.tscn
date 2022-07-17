@@ -1,13 +1,13 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://entities/Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/PlayerCamera/PlayerCamera.gd" type="Script" id=2]
 [ext_resource path="res://scenes/level_1/DeathArea.gd" type="Script" id=3]
 [ext_resource path="res://common/assets/2d/autotiles.tres" type="TileSet" id=4]
-[ext_resource path="res://common/assets/2d/Green Key.png" type="Texture" id=5]
+[ext_resource path="res://entities/Chest/Chest.tscn" type="PackedScene" id=5]
 [ext_resource path="res://common/assets/2d/bird placeholder.png" type="Texture" id=6]
 [ext_resource path="res://common/assets/2d/centaur placeholder.png" type="Texture" id=7]
-[ext_resource path="res://common/assets/2d/Blue Key.png" type="Texture" id=8]
+[ext_resource path="res://entities/Keys/BlueKey.tscn" type="PackedScene" id=8]
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-1.png" type="Texture" id=9]
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-3.png" type="Texture" id=10]
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-2.png" type="Texture" id=11]
@@ -15,76 +15,10 @@
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-5.png" type="Texture" id=13]
 [ext_resource path="res://entities/HideAndSpawnOnDetection/HideAndSpawnOnDetection.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/Screens/PauseScreen/PauseMenu.tscn" type="PackedScene" id=15]
-[ext_resource path="res://entities/Chest/PandorasBox.png" type="Texture" id=16]
-[ext_resource path="res://entities/Chest/GreenKey.gd" type="Script" id=17]
-[ext_resource path="res://entities/Chest/BlueKey.gd" type="Script" id=18]
-[ext_resource path="res://entities/Chest/Chest.gd" type="Script" id=19]
-
-[sub_resource type="RectangleShape2D" id=4]
-
-[sub_resource type="CircleShape2D" id=5]
-radius = 16.0
+[ext_resource path="res://entities/Keys/GreenKey.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7324, 109.5 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 12, 6.5 )
-
-[sub_resource type="Animation" id=6]
-resource_name = "Open"
-length = 4.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ColorRect:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 2.5, 4 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
-}
-
-[sub_resource type="Animation" id=7]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ColorRect:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 0, 0, 0, 0 ) ]
-}
 
 [node name="Node2D" type="Node2D"]
 
@@ -151,44 +85,9 @@ airdeaccel = 10000
 maxspeed = 300
 gravity = 2000
 
-[node name="BlueKey" type="StaticBody2D" parent="." groups=["blue"]]
-collision_layer = 8
-collision_mask = 0
-script = ExtResource( 18 )
+[node name="BlueKey" parent="." instance=ExtResource( 8 )]
 
-[node name="BlueKey" type="Sprite" parent="BlueKey"]
-position = Vector2( 5849, 229 )
-texture = ExtResource( 8 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlueKey"]
-position = Vector2( 5848, 229 )
-shape = SubResource( 4 )
-
-[node name="Area2D" type="Area2D" parent="BlueKey"]
-position = Vector2( 5849, 230 )
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BlueKey/Area2D"]
-shape = SubResource( 5 )
-
-[node name="GreenKey" type="StaticBody2D" parent="." groups=["green"]]
-collision_layer = 8
-collision_mask = 0
-script = ExtResource( 17 )
-
-[node name="GreenKey" type="Sprite" parent="GreenKey"]
-position = Vector2( 9707, 302 )
-texture = ExtResource( 5 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GreenKey"]
-position = Vector2( 9707, 302 )
-shape = SubResource( 4 )
-
-[node name="Area2D" type="Area2D" parent="GreenKey"]
-position = Vector2( 9707, 302 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GreenKey/Area2D"]
-shape = SubResource( 5 )
+[node name="GreenKey" parent="." instance=ExtResource( 16 )]
 
 [node name="Respawns2" type="Node2D" parent="."]
 
@@ -512,31 +411,7 @@ script = ExtResource( 3 )
 position = Vector2( 7236, 99.5 )
 shape = SubResource( 1 )
 
-[node name="Chest" type="StaticBody2D" parent="." groups=["chest"]]
-position = Vector2( 13824, 156 )
-collision_layer = 8
-collision_mask = 0
-script = ExtResource( 19 )
-
-[node name="Sprite" type="Sprite" parent="Chest"]
-position = Vector2( 0, -4 )
-texture = ExtResource( 16 )
-hframes = 13
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chest"]
-position = Vector2( 0, 0.5 )
-shape = SubResource( 2 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Chest"]
-anims/Open = SubResource( 6 )
-anims/RESET = SubResource( 7 )
-
-[node name="ColorRect" type="ColorRect" parent="Chest"]
-margin_left = -1659.0
-margin_top = -521.0
-margin_right = 743.0
-margin_bottom = 409.0
-color = Color( 0, 0, 0, 0 )
+[node name="Chest" parent="." instance=ExtResource( 5 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 479, 189 )
