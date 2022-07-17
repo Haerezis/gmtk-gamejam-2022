@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/GMTK_2022_BACKG_M.mp3-360deec236753e5742984e4da3dc213f.mp3str"
+
+[deps]
+
+source_file="res://Music/GMTK_2022_BACKG_M.mp3"
+dest_files=[ "res://.import/GMTK_2022_BACKG_M.mp3-360deec236753e5742984e4da3dc213f.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
