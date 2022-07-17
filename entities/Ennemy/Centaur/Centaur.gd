@@ -56,7 +56,6 @@ func follow():
 	
 	move_and_slide(getPlayerRotation() * SPEED)
 	
-	
 	animPlayer.play("MOVE")
 	if randf() < b:
 		currentState = CHARGE
