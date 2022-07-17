@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://entities/Player/player.gd" type="Script" id=1]
 [ext_resource path="res://entities/Hurtbox/Hurtbox.tscn" type="PackedScene" id=2]
@@ -157,6 +157,9 @@ extents = Vector2( 9, 2.125 )
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 9, 16.75 )
 
+[sub_resource type="CircleShape2D" id=28]
+radius = 47.1699
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 collision/safe_margin = 0.001
@@ -216,6 +219,13 @@ position = Vector2( 0, 5 )
 position = Vector2( 14, 6 )
 script = ExtResource( 5 )
 throw_force = Vector2( 400, -400 )
+
+[node name="Pickup" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup"]
+shape = SubResource( 28 )
 
 [connection signal="body_entered" from="landing" to="." method="_on_landing_body_entered"]
 [connection signal="timeout" from="jumpbuffer timer" to="." method="_on_Timer_timeout"]
