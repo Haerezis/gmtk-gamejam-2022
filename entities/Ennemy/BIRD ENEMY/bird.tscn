@@ -261,6 +261,7 @@ wait_time = 6.0
 
 [node name="sfx_idle" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+bus = "SFX"
 
 [connection signal="body_entered" from="player detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="player detection" to="." method="_on_player_detection_body_exited"]

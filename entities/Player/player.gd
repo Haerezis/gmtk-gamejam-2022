@@ -28,6 +28,7 @@ var state_machine
 func _input(event):
 	if event.is_action_pressed("shoot"):
 		$ChipThrower.shoot()
+		$sfxAttackChip.play()
 	if event.is_action_pressed("right"):
 		$ChipThrower.direction = Vector2.RIGHT
 		$ChipThrower.position = Vector2(35, 0)
