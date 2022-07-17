@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=22 format=2]
+=======
+[gd_scene load_steps=19 format=2]
+>>>>>>> Stashed changes
 
 [ext_resource path="res://entities/Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/PlayerCamera/PlayerCamera.gd" type="Script" id=2]
@@ -16,10 +20,14 @@
 [ext_resource path="res://entities/HideAndSpawnOnDetection/HideAndSpawnOnDetection.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/Screens/PauseScreen/PauseMenu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://entities/Keys/GreenKey.tscn" type="PackedScene" id=16]
+<<<<<<< Updated upstream
 [ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=17]
 [ext_resource path="res://entities/Platforms/water.tscn" type="PackedScene" id=18]
 [ext_resource path="res://entities/CheckpointRespawn/CheckpointRespawn.tscn" type="PackedScene" id=19]
 [ext_resource path="res://entities/Ennemy/BIRD ENEMY/bird.tscn" type="PackedScene" id=20]
+=======
+[ext_resource path="res://entities/Ennemy/Centaur/Centaur.tscn" type="PackedScene" id=17]
+>>>>>>> Stashed changes
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7324, 109.5 )
@@ -364,6 +372,7 @@ script = ExtResource( 2 )
 [node name="PauseMenu" parent="Camera2D" instance=ExtResource( 15 )]
 visible = false
 
+<<<<<<< Updated upstream
 [node name="bird" parent="." instance=ExtResource( 20 )]
 position = Vector2( 561, 160 )
 scale = Vector2( 0.25, 0.25 )
@@ -387,3 +396,9 @@ position = Vector2( 13822, 153 )
 [editable path="Checkpoints/Checkpoint"]
 [editable path="Checkpoints/Checkpoint7"]
 [editable path="Checkpoints/Checkpoint8"]
+=======
+[node name="Centaur" parent="." instance=ExtResource( 17 )]
+position = Vector2( 495, 251 )
+
+[connection signal="area_entered" from="DeathArea" to="DeathArea" method="_on_DeathArea_area_entered"]
+>>>>>>> Stashed changes
