@@ -23,6 +23,8 @@ func resume():
 
 func restart():
 	get_tree().paused = false
+	
+	get_tree().reload_current_scene()
 
 func exit():
 	get_tree().paused = false
