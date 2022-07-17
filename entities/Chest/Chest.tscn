@@ -84,6 +84,7 @@ margin_left = -1659.0
 margin_top = -521.0
 margin_right = 743.0
 margin_bottom = 409.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 0 )
 
 [connection signal="body_entered" from="." to="." method="_on_Chest_body_entered"]

@@ -20,6 +20,7 @@
 [ext_resource path="res://entities/Platforms/water.tscn" type="PackedScene" id=18]
 [ext_resource path="res://entities/CheckpointRespawn/CheckpointRespawn.tscn" type="PackedScene" id=19]
 [ext_resource path="res://entities/Ennemy/BIRD ENEMY/bird.tscn" type="PackedScene" id=20]
+[ext_resource path="res://entities/Ennemy/Centaur/Centaur.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7324, 109.5 )
@@ -387,3 +388,6 @@ position = Vector2( 13822, 153 )
 [editable path="Checkpoints/Checkpoint"]
 [editable path="Checkpoints/Checkpoint7"]
 [editable path="Checkpoints/Checkpoint8"]
+
+[node name="Centaur" parent="." instance=ExtResource( 21 )]
+position = Vector2( 495, 251 )
