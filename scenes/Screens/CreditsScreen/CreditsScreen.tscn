@@ -148,20 +148,20 @@ custom_fonts/font = ExtResource( 4 )
 text = "wereweasel"
 
 [node name="Louis" type="Label" parent="Names/Names"]
-margin_left = 4.0
-margin_top = 272.0
-margin_right = 89.0
-margin_bottom = 306.0
+margin_left = 8.0
+margin_top = 265.0
+margin_right = 177.0
+margin_bottom = 299.0
 custom_colors/font_color = Color( 0.180392, 0.145098, 0.145098, 1 )
 custom_fonts/font = ExtResource( 4 )
-text = "louis"
+text = " Louis de Bailliencourt"
 align = 1
 
 [node name="SpencerChamp" type="Label" parent="Names/Names"]
-margin_left = 93.0
-margin_top = 294.0
-margin_right = 178.0
-margin_bottom = 328.0
+margin_left = 141.0
+margin_top = 296.0
+margin_right = 241.0
+margin_bottom = 330.0
 custom_colors/font_color = Color( 0.180392, 0.145098, 0.145098, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "spencerchamp"

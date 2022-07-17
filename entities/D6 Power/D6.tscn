@@ -121,6 +121,9 @@ gravity_scale = 20.0
 linear_damp = 0.0
 angular_damp = 0.0
 script = ExtResource( 2 )
+bomb_damage = 20
+laser_damage = 10
+bouncing_dice_damage = 40
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

@@ -64,7 +64,6 @@ func _ready():
 func _process(delta):
 	get_parent().get_node("HUD").get_node("MarginContainer/HBoxContainer/Chip/TextureRect/Label").text = str(hp)
 #getting the movement direction
-	print(hp)
 	var dir = Vector2.ZERO
 	dir.x = (Input.get_action_strength("right") - Input.get_action_strength("left"))
 

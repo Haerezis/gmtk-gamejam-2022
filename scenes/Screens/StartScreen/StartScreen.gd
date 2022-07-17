@@ -13,7 +13,8 @@ func playPressed():
 	$AnimatedSprite.play("default", true)
 
 func startLevel():
-	get_tree().change_scene("res://scenes/level_1/level_1.tscn")
+#	get_tree().change_scene("res://scenes/level_1/level_1.tscn")
+	get_tree().change_scene("res://scenes/level_1/level_1_no_birds.tscn")
 
 func creditsScreen():
 	$AudioStreamPlayer.play()

@@ -136,9 +136,9 @@ export var iframeTime = 1.0
 
 func get_hit(damage):
 	if not invincible:
-		invincible = true
-		$IFrameTimer.wait_time = iframeTime
-		$IFrameTimer.start()
+		#invincible = true
+		#$IFrameTimer.wait_time = iframeTime
+		#$IFrameTimer.start()
 		
 		hp -= damage
 		
