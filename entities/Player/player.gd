@@ -16,9 +16,15 @@ var latejumpbuffer =false
 
 # Called when the node enters the scene tree for the first time.
 
-var hp = 100
+var hp = 10
 var invincible = false
+onready var special_attack = $SpecialAttack
+onready var d6_cooldown = special_attack.cooldown
 export var iframeTime = 1
+
+signal hit_points
+signal cooldowns
+signal throw_d6
 
 var buffering
 var prevdir = Vector2.ZERO
@@ -34,6 +40,10 @@ func _input(event):
 	if event.is_action_pressed("left"):
 		$ChipThrower.direction = Vector2.LEFT
 		$ChipThrower.position = Vector2(-35, 0)
+	if event.is_action_pressed("special_attack"):
+		if special_attack.throw_d6():
+			emit_signal("throw_d6")
+
 
 
 
@@ -42,7 +52,8 @@ func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 	$Hurtbox.connect("damage", self, "get_hit")
 	$IFrame.connect("timeout", self, "breakInvincible")
-	$Pickup.connect("body_entered", self, "pickupKey")
+	emit_signal("hit_points", hp)
+	emit_signal("cooldowns", 10, d6_cooldown, 10)
 
 
 
@@ -151,18 +162,3 @@ func respawn():
 func breakInvincible():
 	invincible =false
 
-var blue = false
-var green = false
-
-func pickupKey(key):
-	if key.is_in_group("blue"):
-		print("blue")
-		blue = true
-		key.queue_free()
-	elif key.is_in_group("green"):
-		print("green")
-		green = true
-		key.queue_free()
-	elif key.is_in_group("chest"):
-		if blue and green:
-			key.open()
