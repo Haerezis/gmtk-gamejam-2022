@@ -69,3 +69,5 @@ margin_right = 105.0
 margin_bottom = 145.0
 custom_fonts/font = ExtResource( 2 )
 text = "Exit"
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_ContinueButton_pressed"]

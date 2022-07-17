@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://entities/Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/PlayerCamera/PlayerCamera.gd" type="Script" id=2]
@@ -19,7 +19,6 @@
 [ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=17]
 [ext_resource path="res://entities/Platforms/water.tscn" type="PackedScene" id=18]
 [ext_resource path="res://entities/CheckpointRespawn/CheckpointRespawn.tscn" type="PackedScene" id=19]
-[ext_resource path="res://entities/Ennemy/BIRD ENEMY/bird.tscn" type="PackedScene" id=20]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7324, 109.5 )
@@ -269,31 +268,6 @@ texture = ExtResource( 7 )
 
 [node name="Birds" type="Node2D" parent="."]
 
-[node name="BirdPlaceholder2" type="Sprite" parent="Birds"]
-position = Vector2( 3254.15, 225.16 )
-rotation = 0.00945942
-texture = ExtResource( 6 )
-
-[node name="BirdPlaceholder" type="Sprite" parent="Birds"]
-position = Vector2( 3346.15, 225.16 )
-texture = ExtResource( 6 )
-
-[node name="BirdPlaceholder3" type="Sprite" parent="Birds"]
-position = Vector2( 4025, 188 )
-texture = ExtResource( 6 )
-
-[node name="BirdPlaceholder4" type="Sprite" parent="Birds"]
-position = Vector2( 5725, 209 )
-texture = ExtResource( 6 )
-
-[node name="BirdPlaceholder5" type="Sprite" parent="Birds"]
-position = Vector2( 5796, 208 )
-texture = ExtResource( 6 )
-
-[node name="BirdPlaceholder6" type="Sprite" parent="Birds"]
-position = Vector2( 7161, 200 )
-texture = ExtResource( 6 )
-
 [node name="BirdPlaceholder7" type="Sprite" parent="Birds"]
 position = Vector2( 7694, 155 )
 texture = ExtResource( 6 )
@@ -363,11 +337,6 @@ script = ExtResource( 2 )
 
 [node name="PauseMenu" parent="Camera2D" instance=ExtResource( 15 )]
 visible = false
-
-[node name="bird" parent="." instance=ExtResource( 20 )]
-position = Vector2( 561, 160 )
-scale = Vector2( 0.25, 0.25 )
-distancefromplayer = 100
 
 [node name="BlueKey" parent="." instance=ExtResource( 8 )]
 position = Vector2( 5881, 226 )
