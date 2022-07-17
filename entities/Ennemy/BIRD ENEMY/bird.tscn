@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://common/assets/2d/bird placeholder.png" type="Texture" id=1]
 [ext_resource path="res://entities/Ennemy/BIRD ENEMY/bird enemy.gd" type="Script" id=2]
 [ext_resource path="res://entities/Hitbox/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/Hurtbox/Hurtbox.tscn" type="PackedScene" id=4]
