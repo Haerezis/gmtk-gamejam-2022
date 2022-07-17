@@ -1,0 +1,50 @@
+[gd_resource type="Theme" load_steps=7 format=2]
+
+[ext_resource path="res://ui/MainMenu/Themes/buttonStyle.tres" type="StyleBox" id=1]
+
+[sub_resource type="DynamicFontData" id=6]
+font_path = "res://ui/MainMenu/Themes/Default.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = SubResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.521569, 0.45098, 0.388235, 1 )
+border_width_left = 10
+border_width_bottom = 1
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 1.0
+shadow_color = Color( 1, 1, 1, 0.321569 )
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.521569, 0.45098, 0.388235, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="DynamicFont" id=5]
+size = 24
+font_data = SubResource( 6 )
+
+[resource]
+Button/fonts/font = SubResource( 2 )
+Button/styles/hover = SubResource( 3 )
+Button/styles/normal = ExtResource( 1 )
+Button/styles/pressed = SubResource( 4 )
+Label/fonts/font = SubResource( 5 )
