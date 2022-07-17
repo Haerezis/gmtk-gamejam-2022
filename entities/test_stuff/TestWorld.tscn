@@ -31,7 +31,6 @@ position = Vector2( 341, 453 )
 [node name="Centaur" parent="." instance=ExtResource( 4 )]
 position = Vector2( 46, 466 )
 scale = Vector2( 1, 1 )
-SPEED = 60
 
 [node name="Camera2D(This is not final)" type="Camera2D" parent="."]
 position = Vector2( 320, 407 )

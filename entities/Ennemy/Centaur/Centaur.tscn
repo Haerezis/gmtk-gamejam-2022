@@ -155,7 +155,6 @@ tracks/3/keys = {
 }
 
 [sub_resource type="CapsuleShape2D" id=14]
-radius = 10.0
 height = 30.0
 
 [sub_resource type="CapsuleShape2D" id=15]
