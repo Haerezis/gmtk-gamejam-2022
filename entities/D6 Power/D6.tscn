@@ -112,6 +112,7 @@ tracks/0/keys = {
 }
 
 [node name="D6" type="RigidBody2D"]
+collision_layer = 8
 gravity_scale = 20.0
 linear_damp = 0.0
 angular_damp = 0.0

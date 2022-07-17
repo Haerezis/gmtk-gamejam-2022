@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://entities/Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/PlayerCamera/PlayerCamera.gd" type="Script" id=2]
@@ -8,12 +8,72 @@
 [ext_resource path="res://common/assets/2d/bird placeholder.png" type="Texture" id=6]
 [ext_resource path="res://common/assets/2d/centaur placeholder.png" type="Texture" id=7]
 [ext_resource path="res://common/assets/2d/Blue Key.png" type="Texture" id=8]
-[ext_resource path="res://scenes/Screens/PauseScreen/PauseMenu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-1.png" type="Texture" id=9]
+[ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-3.png" type="Texture" id=10]
+[ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-2.png" type="Texture" id=11]
+[ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-4.png" type="Texture" id=12]
+[ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-5.png" type="Texture" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7324, 109.5 )
 
 [node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 479, 189 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_left = -512
+smoothing_enabled = true
+script = ExtResource( 2 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer1" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.01, 1 )
+motion_mirroring = Vector2( 720, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer1"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.1, 1 )
+motion_mirroring = Vector2( 720, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 11 )
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.3, 1 )
+motion_mirroring = Vector2( 720, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 10 )
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.5, 1 )
+motion_mirroring = Vector2( 720, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer4"]
+modulate = Color( 1, 1, 1, 0.133333 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 12 )
+centered = false
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.95, 1 )
+motion_mirroring = Vector2( 720, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer5"]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 13 )
+centered = false
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 4 )
@@ -356,16 +416,5 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
 position = Vector2( 7236, 99.5 )
 shape = SubResource( 1 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 479, 189 )
-current = true
-zoom = Vector2( 0.5, 0.5 )
-limit_left = -512
-smoothing_enabled = true
-script = ExtResource( 2 )
-
-[node name="PauseMenu" parent="Camera2D" instance=ExtResource( 9 )]
-visible = false
 
 [connection signal="area_entered" from="DeathArea" to="DeathArea" method="_on_DeathArea_area_entered"]
