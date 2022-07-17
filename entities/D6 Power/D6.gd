@@ -25,6 +25,7 @@ var can_activate = false
 func _ready():
 	get_tree().create_timer(min_activation_duration / 1000.0).connect("timeout", self, "enable_activation")
 	$AnimationPlayer.play("rolling")
+	$AudioStreamPlayer.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,7 +33,6 @@ func _process(delta):
 	# activate when the dice is "stable" (not moving)
 	if can_activate && abs(linear_velocity.length()) < min_linear_velocity_for_activation && abs(angular_velocity) < min_angular_velocity_for_activation:
 		can_activate = false
-		$AudioStreamPlayer.play()
 		$AnimationPlayer.play("stop_" + str(value))
 		get_tree().create_timer(delay_before_activation / 1000.0).connect("timeout", self, "activate_power")
 		
