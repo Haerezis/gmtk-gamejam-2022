@@ -1,6 +1,7 @@
 extends Node2D
 
 export(Vector2) var throw_force
+export var cooldown = 10
 
 var player
 var camera
@@ -17,8 +18,15 @@ func _input(event):
 	if event.is_action_pressed("special_attack"):
 		throw_d6()
 
+func enable_throw():
+	can_throw_d6 = true
 
 func throw_d6():
+	if !can_throw_d6:
+		return
+
+	can_throw_d6 = false
+	get_tree().create_timer(cooldown).connect("timeout", self, "enable_throw")
 	var value = randi() % 6 + 1
 	var d6 : RigidBody2D = d6_scene.instance()
 	d6.global_position = global_position
