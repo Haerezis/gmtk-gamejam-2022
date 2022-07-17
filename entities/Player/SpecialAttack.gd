@@ -24,11 +24,13 @@ func throw_d6():
 	can_throw_d6 = false
 	get_tree().create_timer(cooldown).connect("timeout", self, "enable_throw")
 	var value = randi() % 6 + 1
+	var direction = -1 if player.get_node("Sprite").flip_h else 1
+	var impulse = Vector2(throw_force.x * direction, throw_force.y)
 	var d6 : RigidBody2D = d6_scene.instance()
 	d6.global_position = global_position
 	d6.init(value, camera)
 	
 	get_tree().current_scene.add_child(d6)
-	d6.apply_central_impulse(throw_force)
+	d6.apply_central_impulse(impulse)
 
 	return true
