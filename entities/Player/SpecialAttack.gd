@@ -14,16 +14,12 @@ func _ready():
 	camera = get_tree().current_scene.get_node("Camera2D")
 	randomize()
 
-func _input(event):
-	if event.is_action_pressed("special_attack"):
-		throw_d6()
-
 func enable_throw():
 	can_throw_d6 = true
 
 func throw_d6():
 	if !can_throw_d6:
-		return
+		return false
 
 	can_throw_d6 = false
 	get_tree().create_timer(cooldown).connect("timeout", self, "enable_throw")
@@ -34,3 +30,5 @@ func throw_d6():
 	
 	get_tree().current_scene.add_child(d6)
 	d6.apply_central_impulse(throw_force)
+
+	return true

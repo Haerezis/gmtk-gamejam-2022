@@ -16,6 +16,7 @@
 [ext_resource path="res://entities/HideAndSpawnOnDetection/HideAndSpawnOnDetection.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/Screens/PauseScreen/PauseMenu.tscn" type="PackedScene" id=15]
 [ext_resource path="res://common/assets/audio/GMTK_2022_Main_Theme_V1.1.mp3" type="AudioStream" id=16]
+[ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7324, 109.5 )
@@ -30,7 +31,6 @@ motion_mirroring = Vector2( 720, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer1"]
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 9 )
 centered = false
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -69,6 +69,8 @@ motion_mirroring = Vector2( 720, 0 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 13 )
 centered = false
+
+[node name="HUD" parent="." instance=ExtResource( 17 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 4 )
@@ -426,6 +428,9 @@ script = ExtResource( 2 )
 [node name="PauseMenu" parent="Camera2D" instance=ExtResource( 15 )]
 visible = false
 
+[connection signal="cooldowns" from="player" to="HUD" method="set_cooldowns"]
+[connection signal="hit_points" from="player" to="HUD" method="set_current_health"]
+[connection signal="throw_d6" from="player" to="HUD" method="use_d6"]
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )
 autoplay = true
