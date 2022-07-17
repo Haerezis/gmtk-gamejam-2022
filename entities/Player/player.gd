@@ -84,6 +84,7 @@ func _process(delta):
 		##jumping when on the ground
 		if is_on_floor():
 			velocity.y -= sqrt(2 * gravity * jump)
+			$sfxJump.play()
 		else :
 			##using the buffered input
 			if latejumpbuffer:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://entities/Ennemy/BIRD ENEMY/bird enemy.gd" type="Script" id=2]
 [ext_resource path="res://entities/Hitbox/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/Hurtbox/Hurtbox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://entities/Ennemy/BIRD ENEMY/projectilelauncher.gd" type="Script" id=5]
+[ext_resource path="res://common/assets/audio/sfx_copter_idle.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -257,6 +258,9 @@ script = ExtResource( 5 )
 
 [node name="time between bullets" type="Timer" parent="."]
 wait_time = 6.0
+
+[node name="sfx_idle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 
 [connection signal="body_entered" from="player detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="player detection" to="." method="_on_player_detection_body_exited"]

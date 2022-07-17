@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://entities/Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/PlayerCamera/PlayerCamera.gd" type="Script" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-5.png" type="Texture" id=13]
 [ext_resource path="res://entities/HideAndSpawnOnDetection/HideAndSpawnOnDetection.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/Screens/PauseScreen/PauseMenu.tscn" type="PackedScene" id=15]
-[ext_resource path="res://common/assets/audio/GMTK_2022_Main_Theme_V1.1.mp3" type="AudioStream" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7324, 109.5 )
@@ -425,9 +424,5 @@ script = ExtResource( 2 )
 
 [node name="PauseMenu" parent="Camera2D" instance=ExtResource( 15 )]
 visible = false
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 16 )
-autoplay = true
 
 [connection signal="area_entered" from="DeathArea" to="DeathArea" method="_on_DeathArea_area_entered"]
