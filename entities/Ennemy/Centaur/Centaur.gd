@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+export var rad = 500
 export var hp = 40
 
 enum {CLOSE, IDLE, FOLLOW, CHARGE, DASH, MELEE}
@@ -17,6 +18,8 @@ var dashing = false
 
 func _ready():
 	randomize()
+	
+	$TriggreArea/CollisionShape2D.radius = rad
 	
 	$Hurtbox.connect("damage", self, "get_hit")
 	$IFrameTimer.connect("timeout", self, "breakInvincible")
