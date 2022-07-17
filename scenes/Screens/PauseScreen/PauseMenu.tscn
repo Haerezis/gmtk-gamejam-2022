@@ -20,6 +20,7 @@ margin_top = -180.0
 margin_right = 320.0
 margin_bottom = 180.0
 rect_pivot_offset = Vector2( -634, -136 )
+mouse_filter = 2
 color = Color( 0.701961, 0.701961, 0.701961, 1 )
 
 [node name="ColorRect2" type="ColorRect" parent="."]
@@ -32,6 +33,7 @@ margin_top = -482.0
 margin_right = 1382.0
 margin_bottom = 778.0
 rect_pivot_offset = Vector2( -634, -136 )
+mouse_filter = 2
 color = Color( 0.701961, 0.701961, 0.701961, 0.431373 )
 
 [node name="ContinueButton" type="Button" parent="."]

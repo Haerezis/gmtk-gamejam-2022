@@ -5,8 +5,6 @@
 [ext_resource path="res://scenes/level_1/DeathArea.gd" type="Script" id=3]
 [ext_resource path="res://common/assets/2d/autotiles.tres" type="TileSet" id=4]
 [ext_resource path="res://entities/Chest/Chest.tscn" type="PackedScene" id=5]
-[ext_resource path="res://common/assets/2d/bird placeholder.png" type="Texture" id=6]
-[ext_resource path="res://common/assets/2d/centaur placeholder.png" type="Texture" id=7]
 [ext_resource path="res://entities/Keys/BlueKey.tscn" type="PackedScene" id=8]
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-1.png" type="Texture" id=9]
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-3.png" type="Texture" id=10]
@@ -19,6 +17,8 @@
 [ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=17]
 [ext_resource path="res://entities/Platforms/water.tscn" type="PackedScene" id=18]
 [ext_resource path="res://entities/CheckpointRespawn/CheckpointRespawn.tscn" type="PackedScene" id=19]
+[ext_resource path="res://entities/Ennemy/BIRD ENEMY/bird.tscn" type="PackedScene" id=20]
+[ext_resource path="res://entities/Ennemy/Centaur/Centaur.tscn" type="PackedScene" id=21]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7324, 109.5 )
@@ -194,77 +194,62 @@ position = Vector2( 9690, 285 )
 position = Vector2( 443, -42 )
 
 [node name="Centaurs" type="Node2D" parent="."]
+position = Vector2( 0, -10 )
 
 [node name="SpawnDetector" parent="Centaurs" instance=ExtResource( 14 )]
-position = Vector2( 1125, 10 )
+visible = false
+position = Vector2( 1000, 15 )
 
-[node name="CentaurPlaceholder" type="Sprite" parent="Centaurs/SpawnDetector"]
-position = Vector2( 181, 255 )
-texture = ExtResource( 7 )
+[node name="Centaur" parent="Centaurs/SpawnDetector" instance=ExtResource( 21 )]
+position = Vector2( 239, 279 )
 
-[node name="CentaurPlaceholder2" type="Sprite" parent="Centaurs"]
-position = Vector2( 1915, 236 )
-texture = ExtResource( 7 )
+[node name="Centaur" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 1316, 303 )
 
-[node name="CentaurPlaceholder3" type="Sprite" parent="Centaurs"]
-position = Vector2( 2025, 234 )
-texture = ExtResource( 7 )
+[node name="Centaur2" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 1937, 272 )
 
-[node name="CentaurPlaceholder4" type="Sprite" parent="Centaurs"]
-position = Vector2( 3726, 274 )
-texture = ExtResource( 7 )
+[node name="Centaur3" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 2083, 272 )
 
-[node name="CentaurPlaceholder5" type="Sprite" parent="Centaurs"]
-position = Vector2( 5511, 270 )
-texture = ExtResource( 7 )
+[node name="Centaur4" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 3685, 318 )
 
-[node name="CentaurPlaceholder6" type="Sprite" parent="Centaurs"]
-position = Vector2( 5511, 270 )
-texture = ExtResource( 7 )
+[node name="Centaur5" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 5565, 304 )
 
-[node name="CentaurPlaceholder7" type="Sprite" parent="Centaurs"]
-position = Vector2( 5398, 202 )
-texture = ExtResource( 7 )
+[node name="Centaur6" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 5675, 305 )
 
-[node name="CentaurPlaceholder8" type="Sprite" parent="Centaurs"]
-position = Vector2( 5625, 210 )
-texture = ExtResource( 7 )
+[node name="Centaur7" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 5445, 304 )
 
-[node name="CentaurPlaceholder9" type="Sprite" parent="Centaurs"]
-position = Vector2( 5513, 157 )
-texture = ExtResource( 7 )
+[node name="Centaur8" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 5369, 303 )
 
-[node name="CentaurPlaceholder10" type="Sprite" parent="Centaurs"]
-position = Vector2( 6927, 279 )
-texture = ExtResource( 7 )
+[node name="Centaur9" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 6918, 319 )
 
-[node name="CentaurPlaceholder11" type="Sprite" parent="Centaurs"]
-position = Vector2( 7002, 280 )
-texture = ExtResource( 7 )
+[node name="Centaur10" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 7013, 319 )
 
-[node name="CentaurPlaceholder12" type="Sprite" parent="Centaurs"]
-position = Vector2( 7105, 278 )
-texture = ExtResource( 7 )
+[node name="Centaur11" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 7126, 320 )
 
-[node name="CentaurPlaceholder13" type="Sprite" parent="Centaurs"]
-position = Vector2( 11732, 255 )
-texture = ExtResource( 7 )
+[node name="Centaur12" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 11662, 286 )
 
-[node name="CentaurPlaceholder14" type="Sprite" parent="Centaurs"]
-position = Vector2( 11650, 251 )
-texture = ExtResource( 7 )
+[node name="Centaur13" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 11744, 286 )
 
-[node name="CentaurPlaceholder15" type="Sprite" parent="Centaurs"]
-position = Vector2( 11868, 258 )
-texture = ExtResource( 7 )
+[node name="Centaur14" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 11911, 286 )
 
-[node name="CentaurPlaceholder16" type="Sprite" parent="Centaurs"]
-position = Vector2( 11987, 249 )
-texture = ExtResource( 7 )
+[node name="Centaur15" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 12035, 286 )
 
-[node name="CentaurPlaceholder17" type="Sprite" parent="Centaurs"]
-position = Vector2( 12085, 247 )
-texture = ExtResource( 7 )
+[node name="Centaur16" parent="Centaurs" instance=ExtResource( 21 )]
+position = Vector2( 12134, 287 )
 
 [node name="Birds" type="Node2D" parent="."]
 
@@ -272,33 +257,26 @@ texture = ExtResource( 7 )
 position = Vector2( 7694, 155 )
 texture = ExtResource( 6 )
 
-[node name="BirdPlaceholder8" type="Sprite" parent="Birds"]
-position = Vector2( 7798, 166 )
-texture = ExtResource( 6 )
+[node name="bird8" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 7733, 168 )
 
-[node name="BirdPlaceholder9" type="Sprite" parent="Birds"]
-position = Vector2( 7907, 162 )
-texture = ExtResource( 6 )
+[node name="bird9" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 7885, 175 )
 
-[node name="BirdPlaceholder10" type="Sprite" parent="Birds"]
-position = Vector2( 11617, 163 )
-texture = ExtResource( 6 )
+[node name="bird10" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 11619, 174 )
 
-[node name="BirdPlaceholder11" type="Sprite" parent="Birds"]
-position = Vector2( 11760, 96 )
-texture = ExtResource( 6 )
+[node name="bird11" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 11762, 106 )
 
-[node name="BirdPlaceholder12" type="Sprite" parent="Birds"]
-position = Vector2( 11851, 178 )
-texture = ExtResource( 6 )
+[node name="bird12" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 11952, 110 )
 
-[node name="BirdPlaceholder13" type="Sprite" parent="Birds"]
-position = Vector2( 11953, 97 )
-texture = ExtResource( 6 )
+[node name="bird13" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 11857, 191 )
 
-[node name="BirdPlaceholder14" type="Sprite" parent="Birds"]
-position = Vector2( 12093, 158 )
-texture = ExtResource( 6 )
+[node name="bird14" parent="Birds" instance=ExtResource( 20 )]
+position = Vector2( 12096, 176 )
 
 [node name="Notes" type="Node2D" parent="."]
 visible = false
@@ -345,7 +323,7 @@ position = Vector2( 5881, 226 )
 position = Vector2( 9682, 280 )
 
 [node name="Chest" parent="." instance=ExtResource( 5 )]
-position = Vector2( 13822, 153 )
+position = Vector2( 13805, 138 )
 
 [connection signal="cooldowns" from="player" to="HUD" method="set_cooldowns"]
 [connection signal="hit_points" from="player" to="HUD" method="set_current_health"]
@@ -356,3 +334,6 @@ position = Vector2( 13822, 153 )
 [editable path="Checkpoints/Checkpoint"]
 [editable path="Checkpoints/Checkpoint7"]
 [editable path="Checkpoints/Checkpoint8"]
+
+[node name="Centaur" parent="." instance=ExtResource( 21 )]
+position = Vector2( 495, 251 )
