@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://common/assets/2d/bird placeholder.png" type="Texture" id=1]
 [ext_resource path="res://entities/Ennemy/BIRD ENEMY/bird enemy.gd" type="Script" id=2]
 [ext_resource path="res://entities/Hitbox/Hitbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://entities/Hurtbox/Hurtbox.tscn" type="PackedScene" id=4]
@@ -187,7 +187,7 @@ radius = 48.3735
 extents = Vector2( 33, 32 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 230.5, 188.5 )
+extents = Vector2( 363.25, 314.25 )
 
 [node name="bird" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -237,15 +237,15 @@ shape = SubResource( 8 )
 [node name="IFrameTimer" type="Timer" parent="."]
 
 [node name="player detection" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
+collision_layer = 6
+collision_mask = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player detection"]
-position = Vector2( 288, 224 )
+position = Vector2( 456, 96 )
 shape = SubResource( 9 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="player detection"]
-position = Vector2( -288, 224 )
+position = Vector2( -440, 96 )
 shape = SubResource( 9 )
 
 [node name="change dir" type="Timer" parent="."]
@@ -258,6 +258,7 @@ script = ExtResource( 5 )
 [node name="time between bullets" type="Timer" parent="."]
 wait_time = 6.0
 
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="body_entered" from="player detection" to="." method="_on_player_detection_body_entered"]
 [connection signal="body_exited" from="player detection" to="." method="_on_player_detection_body_exited"]
 [connection signal="timeout" from="change dir" to="." method="_on_change_dir_timeout"]
