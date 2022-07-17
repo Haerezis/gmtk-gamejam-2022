@@ -1,75 +1,9 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://entities/Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/PlayerCamera/PlayerCamera.gd" type="Script" id=2]
 [ext_resource path="res://common/assets/2d/CasinoTileSheet.png" type="Texture" id=3]
-[ext_resource path="res://scenes/ColorRect.gd" type="Script" id=4]
-
-[sub_resource type="Shader" id=5]
-code = "// Kitchen Games / 2D Reflective Water Shader
-
-shader_type canvas_item;
-
-uniform float horizon : hint_range(0.0,1.0); // The height of the horizon
-uniform sampler2D noise;
-uniform float wave_frequency : hint_range(0.0, 100.0);
-uniform float wave_magnitude : hint_range(0.0, .3);
-uniform float noise_wave : hint_range(0.0, 3.0); // add noisiness to waves
-uniform float wave_speed : hint_range(0.0, 20.0);
-
-
-uniform vec4 water_color : hint_color;
-
-void fragment()
-{	
-	vec2 noise_uv = vec2(UV.x + TIME * 0.025,UV.y);
-    
-	float noise_val = pow(texture(noise, UV).r,2.0) +0.4;
-	
-	float wave = horizon;
-	wave += sin(UV.x * wave_frequency + TIME* wave_speed) * wave_magnitude;
-	wave -= texture(noise, UV).r * 0.05 * noise_wave;
-    wave += 0.025*noise_wave;
-	
-	vec2 offset = vec2(0, (wave + abs(UV.y - wave)) - UV.y);
-
-	offset += noise_val* 0.1 - 0.05;
-	vec2 col_uv = SCREEN_UV;
-	
-	col_uv.y = col_uv.y + (offset.y * step(UV.y, wave));
-	
-	vec4 col = texture(SCREEN_TEXTURE, col_uv);
-	col = mix(col, water_color,  step(UV.y, wave) * 0.5);
-	COLOR = col;
-}"
-
-[sub_resource type="OpenSimplexNoise" id=7]
-
-[sub_resource type="NoiseTexture" id=8]
-noise = SubResource( 7 )
-
-[sub_resource type="ShaderMaterial" id=6]
-render_priority = 1
-shader = SubResource( 5 )
-shader_param/horizon = 0.8
-shader_param/wave_frequency = 75.0
-shader_param/wave_magnitude = 0.01
-shader_param/noise_wave = 0.1
-shader_param/wave_speed = 1.0
-shader_param/water_color = Color( 0.27451, 0.298039, 0.92549, 0.403922 )
-shader_param/noise = SubResource( 8 )
-
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 10.955, 21.4999 )
-
-[sub_resource type="Curve" id=11]
-min_value = 1.0
-max_value = 40.0
-_data = [ Vector2( 0.15051, 6.20431 ), 0.0, -4.38791, 0, 0, Vector2( 0.997449, 38.8026 ), 35.3521, 0.0, 0, 0 ]
-
-[sub_resource type="Gradient" id=10]
-offsets = PoolRealArray( 0, 0.530864 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+[ext_resource path="res://entities/Platforms/water.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -126,45 +60,18 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
 [node name="Node2D2" type="Node2D"]
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource( 6 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 1684.0
-margin_top = 690.0
-margin_right = 3853.0
-margin_bottom = 1163.0
-rect_rotation = 180.0
-script = ExtResource( 4 )
+[node name="ColorRect" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1224, 558 )
 
-[node name="Area2D" type="Area2D" parent="ColorRect"]
-collision_layer = 3
-collision_mask = 3
+[node name="Node2D" parent="ColorRect" index="0"]
+show_behind_parent = true
+scale = Vector2( 20, 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/Area2D"]
-position = Vector2( 1079.5, 360.5 )
-scale = Vector2( 100, 1 )
-shape = SubResource( 9 )
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="ColorRect"]
-emitting = false
-amount = 100
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-emission_shape = 1
-emission_sphere_radius = 20.0
-direction = Vector2( 0, 1 )
-spread = 60.0
-gravity = Vector2( 0, -300 )
-initial_velocity = 300.0
-initial_velocity_random = 0.5
-scale_amount = 5.0
-scale_amount_random = 1.0
-scale_amount_curve = SubResource( 11 )
-color = Color( 0.4, 0.415686, 0.882353, 0.611765 )
-color_ramp = SubResource( 10 )
-anim_speed = 1.0
+[node name="ColorRect" parent="ColorRect/Node2D" index="0"]
+margin_left = 1.25
+margin_top = -5.8
+margin_right = 2.25
+margin_bottom = -4.8
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 512, 288 )
@@ -187,4 +94,4 @@ position = Vector2( 318, 150 )
 z_index = -1
 gravity = 3000
 
-[connection signal="area_entered" from="ColorRect/Area2D" to="ColorRect" method="_on_Area2D_area_entered"]
+[editable path="ColorRect"]

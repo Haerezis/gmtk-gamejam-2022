@@ -1,18 +1,18 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/ColorRect.gd" type="Script" id=1]
+[ext_resource path="res://entities/Platforms/water.gd" type="Script" id=1]
 
 [sub_resource type="Shader" id=5]
 code = "// Kitchen Games / 2D Reflective Water Shader
 
 shader_type canvas_item;
 
-uniform float horizon : hint_range(0.0,1.0); // The height of the horizon
+uniform float water_height : hint_range(0.0,1.0);
 uniform sampler2D noise;
 uniform float wave_frequency : hint_range(0.0, 100.0);
-uniform float wave_magnitude : hint_range(0.0, .3);
-uniform float noise_wave : hint_range(0.0, 3.0); // add noisiness to waves
-uniform float wave_speed : hint_range(0.0, 20.0);
+uniform float wave_size : hint_range(0.0, 3.);
+uniform float wave_distortion : hint_range(0.0, 3.0);
+uniform float wave_speed : hint_range(0.0, 2.0);
 
 
 uniform vec4 water_color : hint_color;
@@ -21,23 +21,22 @@ void fragment()
 {	
 	vec2 noise_uv = vec2(UV.x + TIME * 0.025,UV.y);
     
-	float noise_val = pow(texture(noise, UV).r,2.0) +0.4;
+	float noise_val = pow(texture(noise, UV).r, 2.0) +0.4;
 	
-	float wave = horizon;
-	wave += sin(UV.x * wave_frequency + TIME* wave_speed) * wave_magnitude;
-	wave -= texture(noise, UV).r * 0.05 * noise_wave;
-    wave += 0.025*noise_wave;
+	float water_suface = water_height;
+	water_suface += sin(UV.x * wave_frequency + TIME* wave_speed) * wave_size/100.;
+	water_suface -= texture(noise, UV).r * 0.05 * wave_distortion;
+    water_suface += 0.025*wave_distortion;
 	
-	vec2 offset = vec2(0, (wave + abs(UV.y - wave)) - UV.y);
+	vec2 offset = vec2(0., (water_suface + abs(UV.y - water_suface)) - UV.y);
 
 	offset += noise_val* 0.1 - 0.05;
-	vec2 col_uv = SCREEN_UV;
+	vec2 SUV = SCREEN_UV;
 	
-	col_uv.y = col_uv.y + (offset.y * step(UV.y, wave));
+	SUV.y = SUV.y + offset.y * step(UV.y, water_suface);
 	
-	vec4 col = texture(SCREEN_TEXTURE, col_uv);
-	col = mix(col, water_color,  step(UV.y, wave) * 0.5);
-	COLOR = col;
+	vec4 col = texture(SCREEN_TEXTURE, SUV);
+	COLOR =  mix(col, water_color,  step(UV.y, water_suface)/2.);
 }"
 
 [sub_resource type="OpenSimplexNoise" id=7]
@@ -48,63 +47,38 @@ noise = SubResource( 7 )
 [sub_resource type="ShaderMaterial" id=6]
 render_priority = 1
 shader = SubResource( 5 )
-shader_param/horizon = 0.8
-shader_param/wave_frequency = 75.0
-shader_param/wave_magnitude = 0.01
-shader_param/noise_wave = 0.1
+shader_param/water_height = 0.5
+shader_param/wave_frequency = 60.0
+shader_param/wave_size = 0.7
+shader_param/wave_distortion = 0.1
 shader_param/wave_speed = 1.0
 shader_param/water_color = Color( 0.27451, 0.298039, 0.92549, 0.403922 )
 shader_param/noise = SubResource( 8 )
 
 [sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 10.955, 21.4999 )
+extents = Vector2( 0.495, 0.02 )
 
-[sub_resource type="Curve" id=11]
-min_value = 1.0
-max_value = 40.0
-_data = [ Vector2( 0.15051, 6.20431 ), 0.0, -4.38791, 0, 0, Vector2( 0.997449, 38.8026 ), 35.3521, 0.0, 0, 0 ]
+[node name="Control" type="Node2D"]
+script = ExtResource( 1 )
 
-[sub_resource type="Gradient" id=10]
-offsets = PoolRealArray( 0, 0.530864 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0 )
+[node name="Node2D" type="Node2D" parent="."]
 
-[node name="ColorRect" type="ColorRect"]
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
 material = SubResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 1684.0
-margin_top = 690.0
-margin_right = 3853.0
-margin_bottom = 1163.0
+margin_right = 1.0
+margin_bottom = 1.0
 rect_rotation = 180.0
-script = ExtResource( 1 )
+rect_scale = Vector2( 100, 100 )
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 3
+[node name="Area2D" type="Area2D" parent="Node2D/ColorRect"]
+show_behind_parent = true
+position = Vector2( 0.5, 0.5 )
+collision_layer = 0
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 1079.5, 360.5 )
-scale = Vector2( 100, 1 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/ColorRect/Area2D"]
 shape = SubResource( 9 )
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-emitting = false
-amount = 100
-lifetime = 2.0
-one_shot = true
-explosiveness = 1.0
-emission_shape = 1
-emission_sphere_radius = 20.0
-direction = Vector2( 0, 1 )
-spread = 60.0
-gravity = Vector2( 0, -300 )
-initial_velocity = 300.0
-initial_velocity_random = 0.5
-scale_amount = 5.0
-scale_amount_random = 1.0
-scale_amount_curve = SubResource( 11 )
-color = Color( 0.4, 0.415686, 0.882353, 0.611765 )
-color_ramp = SubResource( 10 )
-
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Node2D/ColorRect/Area2D" to="." method="_on_Area2D_area_entered"]
