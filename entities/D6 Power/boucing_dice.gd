@@ -13,6 +13,7 @@ var velocity = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimationPlayer.play("rolling")
 	$Hitbox.dmg = damage
 	initial_direction = Vector2(1,-1)
 	velocity = initial_direction * speed
@@ -22,9 +23,10 @@ func _ready():
 func _process(delta):
 	var next_position = self.position + velocity * delta
 	
-	var from = camera.get_camera_screen_center()
-	var to = from + get_viewport().size
-	
+	var screen_size = get_viewport().size * camera.zoom
+	var from = camera.get_camera_screen_center() - screen_size / 2
+	var to = from + screen_size
+
 	if next_position.x < from.x or next_position.x > to.x:
 		if number_of_bounce > 0:
 			velocity.x = -velocity.x

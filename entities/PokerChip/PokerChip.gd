@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var direction
-export var maxDistance = 400
+export var maxDistance = 75
 export var speed = 500
 
 var initial_position
