@@ -10,14 +10,18 @@ onready var player = get_parent().get_node("Player")
 export var distancefromplayer = 1580
 export var hp = 5
 export var attack_damage = 1 
+func _ready():
+	$AnimationPlayer.play("bird anim")
 func _physics_process(delta: float) -> void:
 	velocity.x = 0
 	if not playerdetected :
 		if go_right :
+			$Sprite.flip_h = true
 			velocity.x += speeeeed * delta
 			$"player detection/CollisionShape2D2".disabled = true
 			$"player detection/CollisionShape2D".disabled = false
 		else:
+			$Sprite.flip_h = false
 			velocity.x -= speeeeed * delta
 			$"player detection/CollisionShape2D2".disabled = false
 			$"player detection/CollisionShape2D".disabled = true
