@@ -84,7 +84,6 @@ gravity = 3000
 parameters/playback = SubResource( 5 )
 
 [node name="SpecialAttack" parent="player" index="10"]
-throw_force = Vector2( 5, 2 )
 camera = NodePath("../../Camera2D")
 
 [editable path="player"]

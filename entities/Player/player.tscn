@@ -213,6 +213,7 @@ position = Vector2( 0, 5 )
 [node name="SpecialAttack" type="Node2D" parent="."]
 position = Vector2( 14, 6 )
 script = ExtResource( 5 )
+throw_force = Vector2( 400, -400 )
 
 [connection signal="body_entered" from="landing" to="." method="_on_landing_body_entered"]
 [connection signal="timeout" from="jumpbuffer timer" to="." method="_on_Timer_timeout"]
