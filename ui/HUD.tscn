@@ -30,18 +30,20 @@ margin_right = 20.0
 margin_bottom = 710.0
 
 [node name="4D" parent="MarginContainer/HBoxContainer" instance=ExtResource( 4 )]
+visible = false
 margin_left = 100.0
 margin_right = 100.0
 margin_bottom = 710.0
 
 [node name="6D" parent="MarginContainer/HBoxContainer" instance=ExtResource( 5 )]
-margin_left = 180.0
-margin_right = 180.0
+margin_left = 100.0
+margin_right = 100.0
 margin_bottom = 710.0
 
 [node name="20D" parent="MarginContainer/HBoxContainer" instance=ExtResource( 2 )]
-margin_left = 260.0
-margin_right = 260.0
+visible = false
+margin_left = 180.0
+margin_right = 180.0
 margin_bottom = 710.0
 
 [connection signal="ready" from="." to="." method="set_current_health" binds= [ 5 ]]
