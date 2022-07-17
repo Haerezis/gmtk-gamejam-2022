@@ -16,11 +16,13 @@ var latejumpbuffer =false
 
 # Called when the node enters the scene tree for the first time.
 
-var hp = 10
+export var base_hp = 10
+var hp = base_hp
 var invincible = false
 onready var special_attack = $SpecialAttack
 onready var d6_cooldown = special_attack.cooldown
 export var iframeTime = 1
+var respawn_point = null
 
 signal hit_points
 signal cooldowns
@@ -154,11 +156,24 @@ func _on_Timer_timeout():
 
 #on player death respawn
 func _on_HP_Logic_die():
+	die()
+	
+func _on_HP_Logic_iframes():
+	pass # Replace with function body.
+
+func die():
 	respawn()
 	
 func respawn():
-	pass
+	hp = base_hp
+	velocity = Vector2.ZERO
+	global_position = respawn_point.global_position
+
 
 func breakInvincible():
 	invincible =false
+
+func set_respawn(point):
+	respawn_point = point
+
 
