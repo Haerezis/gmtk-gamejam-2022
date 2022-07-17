@@ -21,11 +21,11 @@ var camera
 
 var can_activate = false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().create_timer(min_activation_duration / 1000.0).connect("timeout", self, "enable_activation")
 	$AnimationPlayer.play("rolling")
-	$AudioStreamPlayer.play()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,16 +48,12 @@ func enable_activation():
 
 
 func activate_power():
-	$diceresult.play()
 	if value == 1 or value == 2:
 		activate_bomb()
-		$dicebomb.play()
 	elif value == 3 or value == 4:
 		activate_laser()
-		$dicelazer.play()
 	else:
 		activate_bounce()
-		$dicejackpot.play()
 	
 	get_tree().create_timer(delay_before_free / 1000.0).connect("timeout", self, "queue_free")
 

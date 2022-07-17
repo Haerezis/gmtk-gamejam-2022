@@ -112,4 +112,4 @@ animations = [ {
 [node name="AnimatedSprite" parent="." index="0"]
 frames = SubResource( 49 )
 animation = "filter"
-frame = 16
+frame = 19

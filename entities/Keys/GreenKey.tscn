@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/Chest/GreenKey.gd" type="Script" id=1]
 [ext_resource path="res://common/assets/2d/Green Key.png" type="Texture" id=2]
-[ext_resource path="res://common/assets/audio/sfx_keyobtain.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=4]
 
@@ -27,8 +26,5 @@ position = Vector2( 8.5, 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 5 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

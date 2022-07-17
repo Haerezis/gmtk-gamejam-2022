@@ -30,7 +30,3 @@ func exit():
 	get_tree().paused = false
 	
 	get_tree().change_scene("res://scenes/Screens/StartScreen/StartScreen.tscn")
-
-
-func _on_ContinueButton_pressed():
-	resume()

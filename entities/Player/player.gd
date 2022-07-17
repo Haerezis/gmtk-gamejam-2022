@@ -35,7 +35,6 @@ var state_machine
 
 func _input(event):
 	if event.is_action_pressed("shoot"):
-		$chipattacksfx2.play()
 		$ChipThrower.shoot()
 	if event.is_action_pressed("right"):
 		$ChipThrower.direction = Vector2.RIGHT
@@ -44,7 +43,6 @@ func _input(event):
 		$ChipThrower.direction = Vector2.LEFT
 		$ChipThrower.position = Vector2(-35, 0)
 	if event.is_action_pressed("special_attack"):
-		$diceattacksfx.play()
 		if special_attack.throw_d6():
 			emit_signal("throw_d6")
 
@@ -62,9 +60,7 @@ func _ready():
 
 
 func _process(delta):
-	get_parent().get_node("HUD").get_node("MarginContainer/HBoxContainer/Chip/TextureRect/Label").text = str(hp)
 #getting the movement direction
-	print(hp)
 	var dir = Vector2.ZERO
 	dir.x = (Input.get_action_strength("right") - Input.get_action_strength("left"))
 
@@ -181,11 +177,3 @@ func set_respawn(point):
 	respawn_point = point
 
 
-
-
-func _on_Hurtbox_area_entered(area):
-	hp -= 1
-	$playerdamgedsfx.play()
-	yield(get_tree().create_timer(0.6), "timeout")
-	if hp <= 0 :
-		queue_free()

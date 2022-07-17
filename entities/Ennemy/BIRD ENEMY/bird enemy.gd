@@ -10,13 +10,18 @@ onready var player = get_parent().get_node("Player")
 export var distancefromplayer = 1580
 export var hp = 5
 export var attack_damage = 1 
-
-func _ready():
-	$AnimationPlayer.play("bird anim")
 func _physics_process(delta: float) -> void:
 	velocity.x = 0
 	if not playerdetected :
-		pass
+		if go_right :
+			velocity.x += speeeeed * delta
+			$"player detection/CollisionShape2D2".disabled = true
+			$"player detection/CollisionShape2D".disabled = false
+		else:
+			velocity.x -= speeeeed * delta
+			$"player detection/CollisionShape2D2".disabled = false
+			$"player detection/CollisionShape2D".disabled = true
+		velocity = move_and_slide(velocity, Vector2.UP)
 	else : 
 		if player.global_position.x > global_position.x :
 			global_position.x = lerp(global_position.x + distancefromplayer,player.global_position.x,0.03) - distancefromplayer
@@ -53,7 +58,6 @@ func _on_change_dir_timeout():
 
 
 func _on_time_between_bullets_timeout():
-	$lase.play()
 	$projectilelauncher.bullet(self.position.direction_to(player.position))
 	$"time between bullets".start()
 
@@ -61,5 +65,4 @@ func _on_time_between_bullets_timeout():
 func _on_Hurtbox_area_entered(area):
 	hp -= 1
 	if hp <= 0 :
-		yield(get_tree().create_timer(0.6), "timeout")
 		queue_free()
