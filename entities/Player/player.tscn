@@ -169,6 +169,7 @@ texture = ExtResource( 4 )
 hframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 1, 5 )
 shape = SubResource( 1 )
 
@@ -186,6 +187,7 @@ active = true
 parameters/playback = SubResource( 22 )
 
 [node name="landing" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="landing"]
