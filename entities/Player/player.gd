@@ -81,7 +81,6 @@ func _process(delta):
 		latejumpbuffer = false
 #	# Jump button pressed
 	if Input.is_action_just_pressed("jump"):
-		print("jump")
 		##jumping when on the ground
 		if is_on_floor():
 			velocity.y -= sqrt(2 * gravity * jump)
@@ -117,23 +116,20 @@ func _process(delta):
 	if is_on_floor() :
 		if dir.x != 0 :
 			state_machine.travel("move")
-			#print("move")
 		else :
 			state_machine.travel("idle")
-			#print("idle")
 	else :
 		if velocity.y < 0:
 			state_machine.travel("jump")
-			#print("jump")
 		elif velocity.y > 0 :
 			state_machine.travel("falling")
-			#print("falling")
+
+
 
 #registering the ground so we can play the "lands" animation
 func _on_landing_body_entered(body):
 #this variable is here to stop the animation from playing when we first load into the scene
 	if StopLandingAnimWhenFirstStart : 
-		print("lands")
 		state_machine.travel("lands")
 	else :
 		StopLandingAnimWhenFirstStart = true
@@ -154,15 +150,3 @@ func respawn():
 func breakInvincible():
 	invincible =false
 
-func get_hit(damage):
-	if not invincible:
-		invincible = true
-		$IFrame.wait_time = iframeTime
-		$IFrame.start()
-		
-		hp -= damage
-		
-		print("oof" + String(hp))
-		
-		if not hp > 0:
-			_on_HP_Logic_die()
