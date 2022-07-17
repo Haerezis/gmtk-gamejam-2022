@@ -76,68 +76,68 @@ centered = false
 
 [node name="HUD" parent="." instance=ExtResource( 17 )]
 
-[node name="Node" type="Node" parent="."]
+[node name="Waters" type="Node" parent="."]
 
-[node name="Water" parent="Node" instance=ExtResource( 18 )]
+[node name="Water" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 1766, 395 )
 z_index = -1
 
-[node name="Area2D" parent="Node/Water/Node2D/ColorRect" index="0"]
+[node name="Area2D" parent="Waters/Water/Node2D/ColorRect" index="0"]
 collision_mask = 2
 
-[node name="Water2" parent="Node" instance=ExtResource( 18 )]
+[node name="Water2" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 2773, 408 )
 z_index = -1
 
-[node name="Water3" parent="Node" instance=ExtResource( 18 )]
+[node name="Water3" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 3073, 406 )
 z_index = -1
 
-[node name="Water4" parent="Node" instance=ExtResource( 18 )]
+[node name="Water4" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 4332, 423 )
 z_index = -1
 
-[node name="Water5" parent="Node" instance=ExtResource( 18 )]
+[node name="Water5" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 4632, 422 )
 z_index = -1
 
-[node name="Water6" parent="Node" instance=ExtResource( 18 )]
+[node name="Water6" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 4932, 422 )
 z_index = -1
 
-[node name="Water7" parent="Node" instance=ExtResource( 18 )]
+[node name="Water7" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 6301, 421 )
 z_index = -1
 
-[node name="Water8" parent="Node" instance=ExtResource( 18 )]
+[node name="Water8" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 6601, 420 )
 z_index = -1
 
-[node name="Water9" parent="Node" instance=ExtResource( 18 )]
+[node name="Water9" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 6901, 420 )
 z_index = -1
 
-[node name="Water10" parent="Node" instance=ExtResource( 18 )]
+[node name="Water10" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 8459, 456 )
 z_index = -1
 
-[node name="Water11" parent="Node" instance=ExtResource( 18 )]
+[node name="Water11" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 8759, 455 )
 z_index = -1
 
-[node name="Water12" parent="Node" instance=ExtResource( 18 )]
+[node name="Water12" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 9059, 455 )
 z_index = -1
 
-[node name="Water13" parent="Node" instance=ExtResource( 18 )]
+[node name="Water13" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 9359, 454 )
 z_index = -1
 
-[node name="Water14" parent="Node" instance=ExtResource( 18 )]
+[node name="Water14" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 9659, 453 )
 z_index = -1
 
-[node name="Water15" parent="Node" instance=ExtResource( 18 )]
+[node name="Water15" parent="Waters" instance=ExtResource( 18 )]
 position = Vector2( 9959, 453 )
 z_index = -1
 
@@ -383,7 +383,7 @@ position = Vector2( 13822, 153 )
 [connection signal="throw_d6" from="player" to="HUD" method="use_d6"]
 [connection signal="body_entered" from="DeathArea" to="DeathArea" method="_on_DeathArea_body_entered"]
 
-[editable path="Node/Water"]
+[editable path="Waters/Water"]
 [editable path="Checkpoints/Checkpoint"]
 [editable path="Checkpoints/Checkpoint7"]
 [editable path="Checkpoints/Checkpoint8"]

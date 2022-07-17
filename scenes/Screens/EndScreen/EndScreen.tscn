@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/Screens/EndScreen/EvilDie.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Screens/EndScreen/EndingScreen.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Screens/EndScreen/EndScreen.gd" type="Script" id=2]
 [ext_resource path="res://common/assets/fonts/font.tres" type="DynamicFont" id=3]
 
