@@ -1,6 +1,8 @@
 extends Control
 
 func _ready():
+	$AnimationPlayer.play("FadeIn")
+	
 	$Buttons/PlayButton.connect("pressed", self, "startLevel")
 	$Buttons/CreditsButton.connect("pressed", self, "creditsScreen")
 	$Buttons/ExitButton.connect("pressed", self, "exitGame")
