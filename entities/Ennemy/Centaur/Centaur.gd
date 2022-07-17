@@ -19,7 +19,7 @@ var dashing = false
 func _ready():
 	randomize()
 	
-	$TriggerArea/CollisionShape2D.radius = detectionArea
+	$TriggerArea/CollisionShape2D.shape.radius = detectionArea
 	
 	$Hurtbox.connect("damage", self, "get_hit")
 	$IFrameTimer.connect("timeout", self, "breakInvincible")
