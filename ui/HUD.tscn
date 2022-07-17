@@ -17,9 +17,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 10.0
@@ -50,8 +47,12 @@ margin_right = 180.0
 margin_bottom = 710.0
 
 [node name="bluekey" parent="MarginContainer/HBoxContainer" instance=ExtResource( 6 )]
+margin_left = 180.0
+margin_right = 180.0
 
-[node name="Greenkey" parent="MarginContainer/HBoxContainer" instance=ExtResource( 7 )]
+[node name="greenkey" parent="MarginContainer/HBoxContainer" instance=ExtResource( 7 )]
+margin_left = 260.0
+margin_right = 260.0
 script = ExtResource( 8 )
 
 [connection signal="ready" from="." to="." method="set_current_health" binds= [ 5 ]]

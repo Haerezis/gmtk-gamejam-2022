@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://entities/Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/PlayerCamera/PlayerCamera.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-5.png" type="Texture" id=13]
 [ext_resource path="res://entities/HideAndSpawnOnDetection/HideAndSpawnOnDetection.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/Screens/PauseScreen/PauseMenu.tscn" type="PackedScene" id=15]
+[ext_resource path="res://entities/Keys/GreenKey.tscn" type="PackedScene" id=16]
 [ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=17]
 [ext_resource path="res://entities/Platforms/water.tscn" type="PackedScene" id=18]
 [ext_resource path="res://entities/CheckpointRespawn/CheckpointRespawn.tscn" type="PackedScene" id=19]
@@ -329,15 +330,6 @@ texture = ExtResource( 6 )
 visible = false
 position = Vector2( 6312, 331 )
 
-[node name="Note" type="Node2D" parent="Notes"]
-position = Vector2( -433, -110 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Notes/Note"]
-margin_right = 69.0
-margin_bottom = 15.0
-text = "First key"
-fit_content_height = true
-
 [node name="Note2" type="Node2D" parent="Notes"]
 position = Vector2( -15, 23 )
 
@@ -345,15 +337,6 @@ position = Vector2( -15, 23 )
 margin_right = 69.0
 margin_bottom = 15.0
 text = "Moving platforms"
-fit_content_height = true
-
-[node name="Note3" type="Node2D" parent="Notes"]
-position = Vector2( 3377, -90 )
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Notes/Note3"]
-margin_right = 69.0
-margin_bottom = 15.0
-text = "Key 2"
 fit_content_height = true
 
 [node name="Moving Platforms" type="Node2D" parent="."]
@@ -369,8 +352,6 @@ script = ExtResource( 3 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
 position = Vector2( 7321, 19 )
 shape = SubResource( 1 )
-
-[node name="Chest" parent="." instance=ExtResource( 5 )]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 479, 189 )
@@ -389,8 +370,13 @@ scale = Vector2( 0.25, 0.25 )
 distancefromplayer = 100
 
 [node name="BlueKey" parent="." instance=ExtResource( 8 )]
-position = Vector2( 5838, 225 )
+position = Vector2( 5881, 226 )
 
+[node name="GreenKey" parent="." instance=ExtResource( 16 )]
+position = Vector2( 9682, 280 )
+
+[node name="Chest" parent="." instance=ExtResource( 5 )]
+position = Vector2( 13822, 153 )
 
 [connection signal="cooldowns" from="player" to="HUD" method="set_cooldowns"]
 [connection signal="hit_points" from="player" to="HUD" method="set_current_health"]

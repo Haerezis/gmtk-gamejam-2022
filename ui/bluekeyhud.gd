@@ -8,7 +8,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 
-func blue_keyy_grabbed():
+func key_grabbed():
 	$BlueKey.self_modulate = Color(1, 1,1,1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
