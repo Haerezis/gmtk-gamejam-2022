@@ -12,6 +12,9 @@ export var min_activation_duration = 1000
 export var min_linear_velocity_for_activation = 1
 export var min_angular_velocity_for_activation = (PI / 360) * 5
 
+export var delay_before_activation = 1000
+export var delay_before_free = 1000
+
 var value
 var camera
 
@@ -22,14 +25,17 @@ var can_activate = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().create_timer(min_activation_duration / 1000.0).connect("timeout", self, "enable_activation")
+	$AnimationPlayer.play("rolling")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# activate when the dice is "stable" (not moving)
 	if can_activate && abs(linear_velocity.length()) < min_linear_velocity_for_activation && abs(angular_velocity) < min_angular_velocity_for_activation:
-		activate_power()
 		can_activate = false
+		$AnimationPlayer.play("stop_" + str(value))
+		get_tree().create_timer(delay_before_activation / 1000.0).connect("timeout", self, "activate_power")
+		
 
 
 func init(value, camera):
@@ -48,7 +54,8 @@ func activate_power():
 		activate_laser()
 	else:
 		activate_bounce()
-				
+	
+	get_tree().create_timer(delay_before_free / 1000.0).connect("timeout", self, "queue_free")
 
 func activate_bomb():
 	var bomb = bomb_scn.instance()

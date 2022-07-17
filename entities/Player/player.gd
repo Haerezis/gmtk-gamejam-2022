@@ -81,7 +81,6 @@ func _process(delta):
 		latejumpbuffer = false
 #	# Jump button pressed
 	if Input.is_action_just_pressed("jump"):
-		print("jump")
 		##jumping when on the ground
 		if is_on_floor():
 			velocity.y -= sqrt(2 * gravity * jump)
@@ -117,17 +116,13 @@ func _process(delta):
 	if is_on_floor() :
 		if dir.x != 0 :
 			state_machine.travel("move")
-			print("move")
 		else :
 			state_machine.travel("idle")
-			print("idle")
 	else :
 		if velocity.y < 0:
 			state_machine.travel("jump")
-			print("jump")
 		elif velocity.y > 0 :
 			state_machine.travel("falling")
-			print("falling")
 
 
 
@@ -135,7 +130,6 @@ func _process(delta):
 func _on_landing_body_entered(body):
 #this variable is here to stop the animation from playing when we first load into the scene
 	if StopLandingAnimWhenFirstStart : 
-		print("lands")
 		state_machine.travel("lands")
 	else :
 		StopLandingAnimWhenFirstStart = true

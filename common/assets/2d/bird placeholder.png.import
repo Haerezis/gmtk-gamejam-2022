@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CasinoTileSheet.png-2110ed3f2baa405fc5a862fc56a66edd.stex"
+path="res://.import/bird placeholder.png-65831af8ec889251be2a4c877bbd46bb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://common/assets/2d/CasinoTileSheet.png"
-dest_files=[ "res://.import/CasinoTileSheet.png-2110ed3f2baa405fc5a862fc56a66edd.stex" ]
+source_file="res://common/assets/2d/bird placeholder.png"
+dest_files=[ "res://.import/bird placeholder.png-65831af8ec889251be2a4c877bbd46bb.stex" ]
 
 [params]
 
