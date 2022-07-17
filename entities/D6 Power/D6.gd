@@ -20,7 +20,6 @@ var camera
 
 
 var can_activate = false
-var played = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,12 +29,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if linear_velocity.y == 0 and played:
-		$AudioStreamPlayer.play()
-		played = false
 	# activate when the dice is "stable" (not moving)
 	if can_activate && abs(linear_velocity.length()) < min_linear_velocity_for_activation && abs(angular_velocity) < min_angular_velocity_for_activation:
 		can_activate = false
+		$AudioStreamPlayer.play()
 		$AnimationPlayer.play("stop_" + str(value))
 		get_tree().create_timer(delay_before_activation / 1000.0).connect("timeout", self, "activate_power")
 		
