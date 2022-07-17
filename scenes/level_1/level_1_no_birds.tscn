@@ -196,48 +196,59 @@ position = Vector2( 0, -10 )
 
 [node name="Centaur" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 1316, 303 )
+hp = 15
 
 [node name="Centaur2" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 1937, 272 )
+hp = 15
 
 [node name="Centaur3" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 2083, 272 )
+hp = 15
 
 [node name="Centaur4" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 3685, 318 )
+hp = 15
 
 [node name="Centaur5" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 5565, 301 )
-
-[node name="Centaur6" parent="Centaurs" instance=ExtResource( 17 )]
-position = Vector2( 5675, 302 )
+hp = 15
 
 [node name="Centaur7" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 5374, 302 )
+hp = 15
 
 [node name="Centaur9" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 6918, 319 )
+hp = 15
 
 [node name="Centaur10" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 7013, 319 )
+hp = 15
 
 [node name="Centaur11" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 7126, 319 )
+hp = 15
 
 [node name="Centaur12" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 11662, 286 )
+hp = 15
 
 [node name="Centaur13" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 11744, 286 )
+hp = 15
 
 [node name="Centaur14" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 11911, 286 )
+hp = 15
 
 [node name="Centaur15" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 12035, 286 )
+hp = 15
 
 [node name="Centaur16" parent="Centaurs" instance=ExtResource( 17 )]
 position = Vector2( 12134, 287 )
+hp = 15
 
 [node name="Notes" type="Node2D" parent="."]
 visible = false
