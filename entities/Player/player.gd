@@ -16,9 +16,17 @@ var latejumpbuffer =false
 
 # Called when the node enters the scene tree for the first time.
 
-var hp = 100
+export var base_hp = 10
+var hp = base_hp
 var invincible = false
+onready var special_attack = $SpecialAttack
+onready var d6_cooldown = special_attack.cooldown
 export var iframeTime = 1
+var respawn_point = null
+
+signal hit_points
+signal cooldowns
+signal throw_d6
 
 var buffering
 var prevdir = Vector2.ZERO
@@ -34,6 +42,10 @@ func _input(event):
 	if event.is_action_pressed("left"):
 		$ChipThrower.direction = Vector2.LEFT
 		$ChipThrower.position = Vector2(-35, 0)
+	if event.is_action_pressed("special_attack"):
+		if special_attack.throw_d6():
+			emit_signal("throw_d6")
+
 
 
 
@@ -42,6 +54,8 @@ func _ready():
 	state_machine = $AnimationTree.get("parameters/playback")
 	$Hurtbox.connect("damage", self, "get_hit")
 	$IFrame.connect("timeout", self, "breakInvincible")
+	emit_signal("hit_points", hp)
+	emit_signal("cooldowns", 10, d6_cooldown, 10)
 
 
 
@@ -142,11 +156,24 @@ func _on_Timer_timeout():
 
 #on player death respawn
 func _on_HP_Logic_die():
+	die()
+	
+func _on_HP_Logic_iframes():
+	pass # Replace with function body.
+
+func die():
 	respawn()
 	
 func respawn():
-	pass
+	hp = base_hp
+	velocity = Vector2.ZERO
+	global_position = respawn_point.global_position
+
 
 func breakInvincible():
 	invincible =false
+
+func set_respawn(point):
+	respawn_point = point
+
 

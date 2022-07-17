@@ -1,12 +1,15 @@
 extends KinematicBody2D
 
-export var velocity = Vector2()
+var velocity = Vector2()
 export var speeeeed = 4000
 onready var go_right = true
 var playerdetected = false
 onready var raycasteight = get_node('RayCast2D')
 onready var raycastleft = get_node('RayCast2D2')
 onready var player = get_parent().get_node("Player")
+export var distancefromplayer = 1580
+export var hp = 5
+export var attack_damage = 1 
 func _physics_process(delta: float) -> void:
 	velocity.x = 0
 	if not playerdetected :
@@ -20,10 +23,10 @@ func _physics_process(delta: float) -> void:
 			$"player detection/CollisionShape2D".disabled = true
 		velocity = move_and_slide(velocity, Vector2.UP)
 	else : 
-		if player.position.x > position.x :
-			position.x = lerp(position.x + 158,player.position.x,0.03) - 158
+		if player.global_position.x > global_position.x :
+			global_position.x = lerp(global_position.x + distancefromplayer,player.global_position.x,0.03) - distancefromplayer
 		else:
-			position.x = lerp(position.x - 158,player.position.x,0.03) + 158
+			global_position.x = lerp(global_position.x - distancefromplayer,player.global_position.x,0.03) + distancefromplayer
 		move_and_slide(velocity, Vector2.UP)
 	turnaruond()
 
@@ -57,3 +60,9 @@ func _on_change_dir_timeout():
 func _on_time_between_bullets_timeout():
 	$projectilelauncher.bullet(self.position.direction_to(player.position))
 	$"time between bullets".start()
+
+
+func _on_Hurtbox_area_entered(area):
+	hp -= 1
+	if hp <= 0 :
+		queue_free()

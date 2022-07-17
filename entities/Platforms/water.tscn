@@ -70,7 +70,7 @@ anchor_bottom = 1.0
 margin_right = 1.0
 margin_bottom = 1.0
 rect_rotation = 180.0
-rect_scale = Vector2( 100, 100 )
+rect_scale = Vector2( 300, 200 )
 
 [node name="Area2D" type="Area2D" parent="Node2D/ColorRect"]
 show_behind_parent = true

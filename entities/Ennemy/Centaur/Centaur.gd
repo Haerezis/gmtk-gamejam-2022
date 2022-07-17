@@ -4,6 +4,7 @@ export var hp = 40
 
 enum {CLOSE, IDLE, FOLLOW, CHARGE, DASH, MELEE}
 export var SPEED = 50
+export var DASHSPEED = 200
 
 var currentState = CLOSE
 var direction = Vector2.RIGHT
@@ -75,12 +76,12 @@ func charge():
 
 var a = 0.05
 var dashDuration : float
-export var minDashDuration = 10
+export var minDashDuration = 30
 func dash():
 	
 	animPlayer.play("DASH")
 	
-	move_and_slide(direction * SPEED * 20)
+	move_and_slide(direction * DASHSPEED)
 	
 	dashing = true
 	currentState = IDLE 
