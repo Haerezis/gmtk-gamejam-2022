@@ -2,19 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CasinoTileSheet.png-2110ed3f2baa405fc5a862fc56a66edd.stex"
+path="res://.import/Blue Key.png-f402ffbdecf7e5b27edee1585f541846.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://common/assets/2d/CasinoTileSheet.png"
-dest_files=[ "res://.import/CasinoTileSheet.png-2110ed3f2baa405fc5a862fc56a66edd.stex" ]
+source_file="res://common/assets/2d/Blue Key.png"
+dest_files=[ "res://.import/Blue Key.png-f402ffbdecf7e5b27edee1585f541846.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
