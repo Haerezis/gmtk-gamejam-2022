@@ -6,9 +6,8 @@ func _ready():
 
 func trigger():
 	print("blue key")
+	$AudioStreamPlayer.play()
 	get_parent().get_node("Chest").blueKey = true
-	print(get_parent().get_node("Chest").blueKey)
-	print(get_parent().get_node("Chest").greenKey)
 	get_parent().get_node("HUD").get_node("MarginContainer/HBoxContainer/bluekey").key_grabbed()
 	queue_free()
 

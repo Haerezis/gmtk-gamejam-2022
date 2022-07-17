@@ -253,26 +253,9 @@ position = Vector2( 12134, 287 )
 
 [node name="Birds" type="Node2D" parent="."]
 
-[node name="bird" parent="Birds" instance=ExtResource( 20 )]
-position = Vector2( 3200, 216 )
-
-[node name="bird2" parent="Birds" instance=ExtResource( 20 )]
-position = Vector2( 3369, 216 )
-
-[node name="bird3" parent="Birds" instance=ExtResource( 20 )]
-position = Vector2( 4021, 198 )
-
-[node name="bird4" parent="Birds" instance=ExtResource( 20 )]
-position = Vector2( 5508, 157 )
-
-[node name="bird5" parent="Birds" instance=ExtResource( 20 )]
-position = Vector2( 5615, 217 )
-
-[node name="bird6" parent="Birds" instance=ExtResource( 20 )]
-position = Vector2( 7085, 254 )
-
-[node name="bird7" parent="Birds" instance=ExtResource( 20 )]
-position = Vector2( 7600, 154 )
+[node name="BirdPlaceholder7" type="Sprite" parent="Birds"]
+position = Vector2( 7694, 155 )
+texture = ExtResource( 6 )
 
 [node name="bird8" parent="Birds" instance=ExtResource( 20 )]
 position = Vector2( 7733, 168 )

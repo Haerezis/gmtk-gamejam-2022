@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://entities/Player/player.gd" type="Script" id=1]
 [ext_resource path="res://entities/Hurtbox/Hurtbox.tscn" type="PackedScene" id=2]
@@ -6,9 +6,29 @@
 [ext_resource path="res://entities/Player/BanditRunSheet.png" type="Texture" id=4]
 [ext_resource path="res://entities/Player/SpecialAttack.gd" type="Script" id=5]
 [ext_resource path="res://entities/HP Logic/HP Logic.tscn" type="PackedScene" id=6]
+[ext_resource path="res://common/assets/audio/sfx_player_chipattack1.wav" type="AudioStream" id=7]
+[ext_resource path="res://common/assets/audio/sfx_player_diceattack.wav" type="AudioStream" id=8]
+[ext_resource path="res://common/assets/audio/sfx_player_land.wav" type="AudioStream" id=9]
+[ext_resource path="res://common/assets/audio/sfx_player_jump.wav" type="AudioStream" id=10]
+[ext_resource path="res://common/assets/audio/sfx_player_damage.wav" type="AudioStream" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 9, 16 )
+
+[sub_resource type="Animation" id=29]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("jumpsfx:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "falling"
@@ -23,6 +43,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 10 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("landsfx:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray(  ),
+"transitions": PoolRealArray(  ),
+"update": 1,
+"values": [  ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -43,7 +75,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "jump"
-length = 0.2
+length = 0.5
+loop = true
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -56,6 +89,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("jumpsfx:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -85,6 +130,18 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, 0 ), Vector2( 0, 2 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("landsfx:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -159,7 +216,7 @@ extents = Vector2( 9, 2.125 )
 extents = Vector2( 9, 16.75 )
 
 [sub_resource type="CircleShape2D" id=28]
-radius = 27.0
+radius = 47.1699
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 18
@@ -168,8 +225,6 @@ collision/safe_margin = 0.001
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 2 )
-scale = Vector2( 1, 0.95 )
 texture = ExtResource( 4 )
 hframes = 11
 
@@ -178,6 +233,7 @@ position = Vector2( 1, 5 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 29 )
 anims/falling = SubResource( 8 )
 anims/idle = SubResource( 2 )
 anims/jump = SubResource( 5 )
@@ -198,7 +254,8 @@ position = Vector2( 1, 18.875 )
 shape = SubResource( 4 )
 
 [node name="Hurtbox" parent="." instance=ExtResource( 2 )]
-collision_layer = 2
+collision_layer = 64
+collision_mask = 64
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2( 1, 5.25 )
@@ -227,7 +284,23 @@ shape = SubResource( 28 )
 
 [node name="HP Logic" parent="." instance=ExtResource( 6 )]
 
+[node name="chipattacksfx2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="diceattacksfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="jumpsfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 10 )
+
+[node name="landsfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+
+[node name="playerdamgedsfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
 [connection signal="body_entered" from="landing" to="." method="_on_landing_body_entered"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="timeout" from="jumpbuffer timer" to="." method="_on_Timer_timeout"]
 [connection signal="die" from="HP Logic" to="." method="_on_HP_Logic_die"]
 [connection signal="iframes" from="HP Logic" to="." method="_on_HP_Logic_iframes"]
