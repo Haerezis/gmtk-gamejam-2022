@@ -42,6 +42,7 @@ func _input(event):
 		$ChipThrower.direction = Vector2.LEFT
 		$ChipThrower.position = Vector2(-35, 0)
 	if event.is_action_pressed("special_attack"):
+		$sfxAttackDie.play()
 		if special_attack.throw_d6():
 			emit_signal("throw_d6")
 
@@ -95,9 +96,9 @@ func _process(delta):
 #	# Jump button pressed
 	if Input.is_action_just_pressed("jump"):
 		##jumping when on the ground
+		$sfxJump.play()
 		if is_on_floor():
 			velocity.y -= sqrt(2 * gravity * jump)
-			$sfxJump.play()
 		else :
 			##using the buffered input
 			if latejumpbuffer:

@@ -5,6 +5,7 @@ func _ready():
 	$Area2D.connect("body_entered", self, "trigger")
 
 func trigger():
+	$sfxKey.play()
 	print("blue key")
 	get_parent().get_node("Chest").blueKey = true
 	queue_free()
