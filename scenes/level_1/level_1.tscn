@@ -15,6 +15,8 @@
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-5.png" type="Texture" id=13]
 [ext_resource path="res://entities/HideAndSpawnOnDetection/HideAndSpawnOnDetection.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/Screens/PauseScreen/PauseMenu.tscn" type="PackedScene" id=15]
+
+[ext_resource path="res://entities/miscellaneous/FireFlySPawner.tscn" type="PackedScene" id=16]
 [ext_resource path="res://entities/Keys/GreenKey.tscn" type="PackedScene" id=16]
 [ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=17]
 [ext_resource path="res://entities/Platforms/water.tscn" type="PackedScene" id=18]
@@ -76,6 +78,14 @@ centered = false
 
 [node name="HUD" parent="." instance=ExtResource( 17 )]
 
+[node name="FireFlySPawner" parent="TileMap" instance=ExtResource( 16 )]
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 296, 252 )
+accel = 10000
+airdeaccel = 10000
+maxspeed = 300
+gravity = 2000
 [node name="Node" type="Node" parent="."]
 
 [node name="Water" parent="Node" instance=ExtResource( 18 )]
