@@ -64,14 +64,14 @@ animations = [ {
 extents = Vector2( 324.5, 37.5 )
 
 [node name="Node2D" type="Node2D"]
-scale = Vector2( 2, 2 )
+scale = Vector2( 2, 1 )
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( -328.999, -32.9988 )
 rotation = 1.5708
 frames = SubResource( 17 )
-frame = 6
+frame = 8
 playing = true
 
 [node name="Hitbox" parent="." instance=ExtResource( 2 )]

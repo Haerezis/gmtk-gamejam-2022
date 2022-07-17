@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CasinoTileSheet.png-2110ed3f2baa405fc5a862fc56a66edd.stex"
+path="res://.import/AtlantisParallax-2.png-ce4f087da7c407cc6b6972174cdc17b6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://common/assets/2d/CasinoTileSheet.png"
-dest_files=[ "res://.import/CasinoTileSheet.png-2110ed3f2baa405fc5a862fc56a66edd.stex" ]
+source_file="res://common/assets/2d/parallax/AtlantisParallax-2.png"
+dest_files=[ "res://.import/AtlantisParallax-2.png-ce4f087da7c407cc6b6972174cdc17b6.stex" ]
 
 [params]
 
