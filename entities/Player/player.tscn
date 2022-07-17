@@ -6,7 +6,7 @@
 [ext_resource path="res://entities/Player/BanditRunSheet.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9, 13 )
+extents = Vector2( 9, 16 )
 
 [sub_resource type="Animation" id=8]
 resource_name = "falling"
@@ -154,7 +154,7 @@ graph_offset = Vector2( 0, -65.166 )
 extents = Vector2( 9, 2.125 )
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 9, 16.25 )
+extents = Vector2( 9, 16.75 )
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 0
@@ -168,7 +168,7 @@ texture = ExtResource( 4 )
 hframes = 11
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 1, 4 )
+position = Vector2( 1, 5 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
