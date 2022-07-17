@@ -1,6 +1,6 @@
 extends Area2D
 
 
-func _on_DeathArea_area_entered(object):
-	if object.has_method("die"):
-		object.die()
+func _on_DeathArea_body_entered(body):
+	if body.has_method("die"):
+		body.die()
