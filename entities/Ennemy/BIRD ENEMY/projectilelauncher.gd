@@ -12,7 +12,7 @@ func _ready():
 func bullet(dir):
 	var newprojectile = projectile.instance()
 	newprojectile.dir = dir
-	newprojectile.scale = newprojectile.scale *5
+	newprojectile.scale = newprojectile.scale * 2
 	newprojectile.attack = damage
 	newprojectile.position = self.position
 	owner.add_child(newprojectile)

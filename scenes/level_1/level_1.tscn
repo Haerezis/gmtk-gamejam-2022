@@ -351,6 +351,3 @@ position = Vector2( 13805, 138 )
 [editable path="Checkpoints/Checkpoint"]
 [editable path="Checkpoints/Checkpoint7"]
 [editable path="Checkpoints/Checkpoint8"]
-
-[node name="Centaur" parent="." instance=ExtResource( 21 )]
-position = Vector2( 495, 251 )
