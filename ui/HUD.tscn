@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/HUD.gd" type="Script" id=1]
 [ext_resource path="res://ui/20D.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/Chip.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/4D.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/6D.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/bluekey.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/Greenkey.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/greenkeyhud.gd" type="Script" id=8]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -45,5 +48,10 @@ visible = false
 margin_left = 180.0
 margin_right = 180.0
 margin_bottom = 710.0
+
+[node name="bluekey" parent="MarginContainer/HBoxContainer" instance=ExtResource( 6 )]
+
+[node name="Greenkey" parent="MarginContainer/HBoxContainer" instance=ExtResource( 7 )]
+script = ExtResource( 8 )
 
 [connection signal="ready" from="." to="." method="set_current_health" binds= [ 5 ]]
