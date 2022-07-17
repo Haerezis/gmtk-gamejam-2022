@@ -8,7 +8,7 @@
 [ext_resource path="res://common/assets/2d/bird placeholder.png" type="Texture" id=6]
 [ext_resource path="res://common/assets/2d/centaur placeholder.png" type="Texture" id=7]
 [ext_resource path="res://common/assets/2d/Blue Key.png" type="Texture" id=8]
-[ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-1.png" type="Texture" id=9]
+[ext_resource path="res://ui/HUD.tscn" type="PackedScene" id=9]
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-3.png" type="Texture" id=10]
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-2.png" type="Texture" id=11]
 [ext_resource path="res://common/assets/2d/parallax/AtlantisParallax-4.png" type="Texture" id=12]
@@ -29,7 +29,6 @@ motion_mirroring = Vector2( 720, 0 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer1"]
 scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 9 )
 centered = false
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -68,6 +67,8 @@ motion_mirroring = Vector2( 720, 0 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 13 )
 centered = false
+
+[node name="HUD" parent="." instance=ExtResource( 9 )]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 4 )
@@ -425,4 +426,7 @@ script = ExtResource( 2 )
 [node name="PauseMenu" parent="Camera2D" instance=ExtResource( 15 )]
 visible = false
 
+[connection signal="cooldowns" from="player" to="HUD" method="set_cooldowns"]
+[connection signal="hit_points" from="player" to="HUD" method="set_current_health"]
+[connection signal="throw_d6" from="player" to="HUD" method="use_d6"]
 [connection signal="area_entered" from="DeathArea" to="DeathArea" method="_on_DeathArea_area_entered"]
